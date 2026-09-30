@@ -1,0 +1,1344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Holiday Campaign Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300&display=swap" rel="stylesheet">
+<script>
+/* Look: set before first paint so there is no flash. Stored under holiday-planner.look. */
+(function(){var l=null;try{l=localStorage.getItem('holiday-planner.look');}catch(e){}
+if(l==='commerce7'){document.documentElement.setAttribute('data-look','commerce7');
+var k=document.createElement('link');k.id='inter-font';k.rel='stylesheet';k.href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap';document.head.appendChild(k);}})();
+</script>
+<style>
+:root{
+  --surface-base:#f7f5f1;--surface-subtle:#f2efea;--surface-panel:#ece8e1;--surface-raised:#ffffff;
+  --text-primary:#1a1917;--text-secondary:#4f4a43;--text-tertiary:#6b655d;--text-link:#1a6b30;
+  --border-subtle:#ebe7df;--border-default:#ddd8ce;--border-strong:#8d877f;
+  --action-primary-bg:#0b6623;--action-primary-fg:#ffffff;--action-primary-hover:#155826;
+  --interactive-hover-bg:rgba(26,107,48,.08);--interactive-selected-bg:rgba(26,107,48,.12);
+  --focus-ring-color:#1a6b30;
+  --status-success:#127a45;--status-success-bg:#edf8f1;
+  --status-warning:#9c6110;--status-warning-bg:#fff7e7;
+  --status-error:#b73847;--status-error-bg:#fdf0f2;
+  --accent-editorial-500:#996345;
+  --p-club:#7a4d8c;--p-ecom:#305fc9;--p-corp:#1d7373;--p-pc:#2f3642;
+  --shadow-sm:0 6px 18px rgba(26,25,23,.07);--shadow-lg:0 24px 64px rgba(26,25,23,.12);--scrim:rgba(26,25,23,.44);
+  --ease:cubic-bezier(0.2,0,0.2,1);--fast:120ms;--normal:160ms;
+  --font-display:'Newsreader',Georgia,'Times New Roman',serif;
+  --font-body:'Be Vietnam Pro',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --label-w:120px;
+  --radius-chip:6px;--radius-control:10px;--radius-input:10px;--radius-card:16px;
+  --shadow-pop:var(--shadow-sm);
+  --display-weight:300;--display-tracking:-.02em;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --surface-base:#171614;--surface-subtle:#1f1d1b;--surface-panel:#262320;--surface-raised:#34302d;
+    --text-primary:#f5f3ef;--text-secondary:#d0c8bd;--text-tertiary:#b4aba0;--text-link:#8cd0a0;
+    --border-subtle:#3b3632;--border-default:#4c4742;--border-strong:#8a8279;
+    --action-primary-bg:#57bd76;--action-primary-fg:#06210d;--action-primary-hover:#7ecb93;
+    --interactive-hover-bg:rgba(140,208,160,.10);--interactive-selected-bg:rgba(140,208,160,.14);
+    --focus-ring-color:#8cd0a0;
+    --status-success:#47d78b;--status-success-bg:rgba(71,215,139,.16);
+    --status-warning:#f0c36a;--status-warning-bg:rgba(240,195,106,.16);
+    --status-error:#f28c95;--status-error-bg:rgba(242,140,149,.12);
+    --accent-editorial-500:#bc825c;
+    --p-club:#c9a3d9;--p-ecom:#8cb5ff;--p-corp:#7fcfcf;--p-pc:#e3dccf;
+    --shadow-sm:0 6px 18px rgba(0,0,0,.35);--shadow-lg:0 24px 64px rgba(0,0,0,.5);--scrim:rgba(0,0,0,.58);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --surface-base:#171614;--surface-subtle:#1f1d1b;--surface-panel:#262320;--surface-raised:#34302d;
+  --text-primary:#f5f3ef;--text-secondary:#d0c8bd;--text-tertiary:#b4aba0;--text-link:#8cd0a0;
+  --border-subtle:#3b3632;--border-default:#4c4742;--border-strong:#8a8279;
+  --action-primary-bg:#57bd76;--action-primary-fg:#06210d;--action-primary-hover:#7ecb93;
+  --interactive-hover-bg:rgba(140,208,160,.10);--interactive-selected-bg:rgba(140,208,160,.14);
+  --focus-ring-color:#8cd0a0;
+  --status-success:#47d78b;--status-success-bg:rgba(71,215,139,.16);
+  --status-warning:#f0c36a;--status-warning-bg:rgba(240,195,106,.16);
+  --status-error:#f28c95;--status-error-bg:rgba(242,140,149,.12);
+  --accent-editorial-500:#bc825c;
+  --p-club:#c9a3d9;--p-ecom:#8cb5ff;--p-corp:#7fcfcf;--p-pc:#e3dccf;
+  --shadow-sm:0 6px 18px rgba(0,0,0,.35);--shadow-lg:0 24px 64px rgba(0,0,0,.5);--scrim:rgba(0,0,0,.58);
+  color-scheme:dark;
+}
+@media (prefers-reduced-motion:reduce){:root{--fast:0ms;--normal:0ms}}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--surface-base);color:var(--text-primary);font:400 14px/1.5 var(--font-body);-webkit-font-smoothing:antialiased}
+.num{font-variant-numeric:tabular-nums;font-weight:500}
+.caps{font:600 12px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--text-tertiary)}
+.muted{color:var(--text-secondary)}
+.tert{color:var(--text-tertiary)}
+a{color:var(--text-link);text-decoration:none}
+a:hover{text-decoration:underline}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus-ring-color);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1400px;margin:0 auto;padding:0 24px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:6px 14px;border-radius:var(--radius-control);border:1px solid var(--border-strong);background:var(--surface-raised);cursor:pointer;transition:background var(--fast) var(--ease),border-color var(--fast) var(--ease);white-space:nowrap}
+.btn:hover{background:var(--interactive-hover-bg)}
+.btn.primary{background:var(--action-primary-bg);color:var(--action-primary-fg);border-color:var(--action-primary-bg)}
+.btn.primary:hover{background:var(--action-primary-hover)}
+.btn.ghost{border-color:transparent;background:transparent}
+.btn.ghost:hover{background:var(--interactive-hover-bg)}
+.btn.small{min-height:28px;padding:3px 10px;font-size:13px}
+.btn[aria-pressed="true"]{background:var(--interactive-selected-bg)}
+.btn.danger-armed{border-color:var(--status-error);color:var(--status-error)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.icon{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.linkbtn{background:none;border:0;padding:0;color:var(--text-link);cursor:pointer;min-height:24px}
+.linkbtn:hover{text-decoration:underline}
+
+/* Inputs */
+.field{display:flex;flex-direction:column;gap:4px}
+.field label,.lbl{font-size:13px;color:var(--text-secondary)}
+.input,select.input{min-height:36px;padding:6px 10px;border:1px solid var(--border-strong);border-radius:var(--radius-input);background:var(--surface-raised);width:100%}
+.input.num{text-align:right}
+.hint{font-size:12px;color:var(--text-tertiary)}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:1px 8px;border-radius:9999px;font-size:11.5px;line-height:18px;background:var(--surface-panel);color:var(--text-secondary);white-space:nowrap}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:var(--text-tertiary)}
+.calc-tag{font-size:11px;color:var(--text-tertiary);letter-spacing:.02em}
+
+/* Season bar */
+.season{border-bottom:1px solid var(--border-default);background:var(--surface-base)}
+.season .wrap{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;padding-top:20px;padding-bottom:0}
+.season h1{font:var(--display-weight) 32px/1.25 var(--font-display);letter-spacing:var(--display-tracking);margin:0}
+.season .status{color:var(--text-secondary);margin:2px 0 12px}
+.season .titles{flex:1 1 420px;min-width:0}
+.season .right{display:flex;align-items:center;gap:12px;margin-bottom:12px;margin-left:auto}
+.logo{display:inline-flex;align-items:center;gap:6px;color:var(--text-tertiary);font-size:14px;min-height:24px}
+.logo:hover{color:var(--text-secondary);text-decoration:underline}
+.logo svg{width:20px;height:20px}
+.logo-pill{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:6px 14px;background:#ffffff;border:1px solid var(--border-default);border-radius:var(--radius-control);transition:border-color var(--fast) var(--ease),box-shadow var(--fast) var(--ease)}
+.logo-pill:hover{border-color:var(--border-strong);box-shadow:var(--shadow-sm);text-decoration:none}
+.logo-pill img{display:block;height:26px;width:auto}
+.tabs{display:flex;gap:4px;width:100%}
+.tab{border:0;background:transparent;padding:10px 14px;border-bottom:2px solid transparent;cursor:pointer;color:var(--text-secondary);min-height:40px}
+.tab[aria-selected="true"]{color:var(--text-primary);border-bottom-color:var(--action-primary-bg)}
+.tab:hover{background:var(--interactive-hover-bg)}
+.menu{position:relative}
+.menu-list{position:absolute;right:0;top:calc(100% + 4px);background:var(--surface-raised);border:1px solid var(--border-default);border-radius:var(--radius-control);box-shadow:var(--shadow-pop);padding:6px;min-width:220px;z-index:60;display:none}
+.menu-list.open{display:block}
+.menu-list button{display:flex;width:100%;text-align:left;border:0;background:none;padding:8px 10px;border-radius:var(--radius-chip);cursor:pointer;min-height:32px;align-items:center;gap:8px}
+.menu-list button:hover{background:var(--interactive-hover-bg)}
+.menu-list hr{border:0;border-top:1px solid var(--border-subtle);margin:4px 0}
+.hintbar{background:var(--surface-subtle);border-bottom:1px solid var(--border-subtle)}
+.hintbar .wrap{display:flex;align-items:center;gap:8px;padding-top:8px;padding-bottom:8px;font-size:13px}
+
+/* Banners */
+.banner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;border-radius:var(--radius-control);border:1px solid var(--border-default);background:var(--surface-raised);margin-top:16px}
+.banner.info{background:var(--surface-subtle)}
+
+/* Goal header */
+.card{background:var(--surface-raised);border:1px solid var(--border-default);border-radius:var(--radius-card);box-shadow:var(--shadow-sm)}
+.goal{margin-top:16px;padding:24px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px}
+.verdict{display:flex;align-items:flex-start;gap:10px;font:var(--display-weight) 26px/1.25 var(--font-display);margin:0 0 16px}
+.verdict .icon{width:24px;height:24px;margin-top:4px}
+.verdict.short{color:var(--status-warning)}
+.verdict.covers{color:var(--status-success)}
+.verdict.empty{color:var(--text-secondary)}
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:20px}
+.stat .value{font:500 28px/1.15 var(--font-body);font-variant-numeric:tabular-nums;letter-spacing:-.01em;margin-top:6px}
+.stat .input.big{font:500 24px/1.2 var(--font-body);font-variant-numeric:tabular-nums;min-height:44px;margin-top:6px}
+.stat .sub{margin-top:6px;font-size:12px;color:var(--text-tertiary)}
+.stat select.input{margin-top:6px;min-height:32px;font-size:13px}
+.gbar-wrap{position:relative;padding-top:8px;padding-bottom:4px}
+.gkey{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--text-secondary)}
+.gkey .k{display:inline-flex;align-items:center;gap:6px}
+.gkey i{display:inline-block}
+.gkey .kg{width:0;height:14px;border-left:2px solid var(--text-primary)}
+.gkey .kl{width:0;height:14px;border-left:2px dashed var(--text-tertiary)}
+.gkey .ka{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:7px solid var(--text-primary)}
+.gbar{display:flex;height:22px;border-radius:var(--radius-chip);overflow:hidden;background:var(--surface-panel)}
+.gbar span{display:block;height:100%}
+.tick{position:absolute;top:2px;height:34px;width:0;border-left:2px solid var(--text-primary)}
+.tick.ly{border-left:2px dashed var(--text-tertiary)}
+.tick label{position:absolute;top:-16px;transform:translateX(-50%);font-size:11.5px;white-space:nowrap;color:var(--text-secondary)}
+.marker{position:absolute;top:32px;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:8px solid var(--text-primary)}
+.lines{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.line{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.line .icon{color:var(--text-tertiary)}
+.line.ahead{color:var(--status-success)}.line.ahead .icon{color:var(--status-success)}
+.line.behind{color:var(--status-warning)}.line.behind .icon{color:var(--status-warning)}
+.warn-note{color:var(--status-warning);font-size:12.5px;margin-top:6px}
+.legend{display:flex;flex-direction:column;gap:2px}
+.legend-head{display:grid;grid-template-columns:minmax(0,1fr) 88px 88px 40px;gap:8px;padding:0 8px 6px;font-size:12px;color:var(--text-tertiary)}
+.legend-head span:not(:first-child){text-align:right}
+.lrow{display:grid;grid-template-columns:minmax(0,1fr) 88px 88px 40px;gap:8px;align-items:center;padding:6px 8px;border-radius:var(--radius-control);border:1px solid transparent;background:none;cursor:pointer;text-align:left;min-height:36px;width:100%}
+.lrow:hover{background:var(--interactive-hover-bg)}
+.lrow[aria-pressed="true"]{background:var(--interactive-selected-bg);border-color:var(--border-strong)}
+.lrow.static{cursor:default}.lrow.static:hover{background:none}
+.lrow .nm{display:flex;align-items:center;gap:8px}
+.sw{width:12px;height:12px;border-radius:3px;flex:none}
+.lrow .v{text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+.lrow .v.a{color:var(--text-secondary)}
+.lrow .s{text-align:right;color:var(--text-tertiary);font-variant-numeric:tabular-nums}
+.side-actions{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+details.assump{border-top:1px solid var(--border-subtle);padding-top:12px}
+details.assump summary{cursor:pointer;min-height:28px;display:flex;align-items:center;gap:6px;color:var(--text-secondary);list-style:none}
+details.assump summary::-webkit-details-marker{display:none}
+details.assump[open] summary .icon{transform:rotate(180deg)}
+.assump-body{display:grid;gap:14px;margin-top:10px}
+.range{width:100%;accent-color:var(--action-primary-bg)}
+table.ld{border-collapse:collapse;width:100%}
+table.ld th,table.ld td{padding:4px 6px;border-bottom:1px solid var(--border-subtle);text-align:left;font-size:13px}
+table.ld th{color:var(--text-tertiary);font-weight:500}
+table.ld input{min-height:30px;padding:3px 8px;width:90px;text-align:right}
+
+/* Collapsed strip */
+.strip{position:fixed;top:0;left:0;right:0;z-index:20;background:var(--surface-panel);border-bottom:1px solid var(--border-default);transform:translateY(-100%);transition:transform var(--normal) var(--ease)}
+.strip.show{transform:none}
+.strip .wrap{display:flex;gap:20px;align-items:center;min-height:48px;flex-wrap:wrap;font-size:13.5px}
+.strip .sv{font:var(--display-weight) 18px/1.2 var(--font-display)}
+.strip .sv.short{color:var(--status-warning)}.strip .sv.covers{color:var(--status-success)}
+
+/* Calendar */
+.cal-card{margin-top:24px;padding:16px 0 8px}
+.cal-toolbar{display:flex;align-items:center;gap:8px;padding:0 16px 12px;flex-wrap:wrap}
+.cal-toolbar h2{font:var(--display-weight) 24px/1.2 var(--font-display);margin:0 12px 0 0}
+.cal-toolbar .grow{flex:1}
+.cal-frame{overflow-x:auto;position:relative}
+.cal{display:grid;grid-template-columns:var(--label-w) repeat(13,minmax(72px,1fr));min-width:calc(var(--label-w) + 13*72px);position:relative}
+.cal .mh,.cal .wh{padding:4px 6px;font-size:12px;color:var(--text-tertiary);border-bottom:1px solid var(--border-subtle)}
+.cal .mh{font-weight:600;color:var(--text-secondary);border-left:1px solid var(--border-subtle)}
+.cal .wh{border-left:1px solid var(--border-subtle);font-variant-numeric:tabular-nums}
+.cal .wh.now{color:var(--text-primary);font-weight:600}
+.lanelbl{position:sticky;left:0;z-index:4;background:var(--surface-raised);padding:8px 10px;font-size:13px;color:var(--text-secondary);border-bottom:1px solid var(--border-subtle);border-right:1px solid var(--border-default);display:flex;flex-direction:column;justify-content:flex-start;gap:2px}
+.lanelbl b{font-weight:500;color:var(--text-primary)}
+.lanelbl small{font-size:11px;color:var(--text-tertiary)}
+.cell{border-left:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);min-height:56px;cursor:copy;position:relative;padding:0;background:transparent;border-top:0;border-right:0}
+.cell.alt{background:var(--surface-subtle)}
+.cell .plus{display:none;position:absolute;inset:4px;border:1px dashed var(--border-strong);border-radius:var(--radius-chip);color:var(--text-tertiary);font-size:12px;align-items:center;justify-content:center}
+.cell:hover .plus{display:flex}
+.cell.sub{min-height:56px}
+.cal.compact .cell{min-height:32px}
+.cal.compact .cell.key{min-height:auto}
+.cell.key{min-height:auto}
+.chip{position:relative;z-index:3;margin:4px 3px;border-radius:var(--radius-chip);border:1px solid transparent;border-left:3px solid var(--pc,var(--text-tertiary));background:color-mix(in srgb,var(--pc) 12%,var(--surface-raised));color:var(--text-primary);text-align:left;padding:5px 8px;cursor:pointer;display:flex;flex-direction:column;gap:2px;min-height:48px;min-width:0;overflow:hidden;transition:opacity var(--fast) var(--ease),box-shadow var(--fast) var(--ease)}
+.chip:hover{box-shadow:0 2px 8px rgba(26,25,23,.12)}
+.chip .t{font-size:12.5px;line-height:1.25;font-weight:500;overflow-wrap:break-word;-webkit-hyphens:auto;hyphens:auto;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.chip .m{display:flex;gap:6px;align-items:center;font-size:11.5px;color:var(--text-secondary);flex-wrap:nowrap;overflow:hidden;white-space:nowrap}
+.chip .m .amt{font-variant-numeric:tabular-nums;font-weight:500;color:var(--text-primary)}
+.chip .m .pg{color:var(--text-secondary)}
+.chip.theme{background:transparent;border:1px solid var(--border-strong);border-left:1px solid var(--border-strong)}
+.chip.dim{opacity:.35}
+.chip.sel{outline:2px solid var(--text-primary);outline-offset:1px}
+.chip.hl{box-shadow:0 0 0 2px var(--status-warning)}
+.chip .need{display:inline-flex;align-items:center;gap:4px;padding:0 6px;border-radius:9999px;background:var(--surface-panel);color:var(--text-secondary);font-size:11px;line-height:16px}
+.chip .need::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--text-tertiary)}
+.cal.compact .chip{min-height:24px;padding:2px 8px;margin:3px}
+.cal.compact .chip .t{-webkit-line-clamp:1;font-size:12px}
+.cal.compact .chip .m{display:none}
+.overlay{pointer-events:none;position:relative;z-index:2}
+.kd-line{position:absolute;top:0;bottom:0;width:0;border-left:2px dotted var(--accent-editorial-500)}
+.today-line{position:absolute;top:0;bottom:0;width:0;border-left:2px solid var(--text-primary)}
+.today-line span{position:absolute;top:-2px;left:4px;font-size:11px;background:var(--text-primary);color:var(--surface-raised);padding:0 5px;border-radius:4px}
+.kd-label{position:absolute;pointer-events:auto;font-size:11.5px;color:var(--accent-editorial-500);background:var(--surface-raised);border:1px solid color-mix(in srgb,var(--accent-editorial-500) 45%,transparent);border-radius:9999px;padding:0 7px;line-height:18px;white-space:nowrap;cursor:pointer;transform:translateX(-6px)}
+.kd-label:hover{background:var(--interactive-hover-bg)}
+.empty-steps{margin:0 16px 12px;padding:16px 20px;border:1px dashed var(--border-strong);border-radius:var(--radius-card)}
+.empty-steps h3{font:var(--display-weight) 22px/1.2 var(--font-display);margin:0 0 8px}
+.empty-steps ol{margin:0;padding-left:0;list-style:none;display:grid;gap:6px}
+.empty-steps li{display:flex;gap:8px;align-items:center}
+.empty-steps li.done{color:var(--text-tertiary);text-decoration:line-through}
+.empty-steps .ck{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border-strong);display:inline-flex;align-items:center;justify-content:center;flex:none}
+.empty-steps li.done .ck{background:var(--status-success);border-color:var(--status-success);color:#fff}
+
+/* Drawer */
+.scrim{position:fixed;inset:0;background:var(--scrim);opacity:0;pointer-events:none;transition:opacity var(--normal) var(--ease);z-index:39}
+.scrim.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:var(--surface-raised);box-shadow:var(--shadow-lg);z-index:40;transform:translateX(105%);transition:transform var(--normal) var(--ease);display:flex;flex-direction:column;border-left:1px solid var(--border-default)}
+.drawer.open{transform:none}
+.drawer header{display:flex;align-items:center;gap:8px;padding:16px 20px;border-bottom:1px solid var(--border-subtle)}
+.drawer header h2{font:var(--display-weight) 22px/1.2 var(--font-display);margin:0;flex:1}
+.drawer .body{overflow:auto;padding:4px 20px 20px;flex:1}
+.grp{padding:14px 0;border-bottom:1px solid var(--border-subtle);display:grid;gap:10px}
+.grp h3{margin:0;font:600 12px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--text-tertiary)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.result{font:500 24px/1.2 var(--font-body);font-variant-numeric:tabular-nums}
+.vs.up{color:var(--status-success)}.vs.down{color:var(--status-warning)}
+.switch{display:flex;align-items:center;gap:10px;min-height:32px;cursor:pointer}
+.switch input{width:36px;height:20px;accent-color:var(--action-primary-bg)}
+.drawer .actions{display:flex;gap:8px;padding-top:14px}
+
+/* Dialogs */
+dialog{border:1px solid var(--border-default);border-radius:var(--radius-card);background:var(--surface-raised);color:var(--text-primary);box-shadow:var(--shadow-lg);padding:0;width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 48px)}
+dialog::backdrop{background:var(--scrim)}
+.dlg{display:flex;flex-direction:column;max-height:calc(100vh - 48px)}
+.dlg header{padding:20px 24px 8px}
+.dlg header h2{font:var(--display-weight) 22px/1.2 var(--font-display);margin:0}
+.dlg header p{margin:6px 0 0;color:var(--text-secondary)}
+.dlg .body{padding:8px 24px;overflow:auto;display:grid;gap:14px}
+.dlg footer{padding:14px 24px 20px;display:flex;gap:8px;justify-content:flex-end;border-top:1px solid var(--border-subtle)}
+.dlg fieldset{border:1px solid var(--border-subtle);border-radius:var(--radius-control);padding:12px 14px;display:grid;gap:10px;margin:0}
+.dlg legend{font:600 12px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--text-tertiary);padding:0 6px}
+.weeks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 14px}
+.weeks-grid .field{flex-direction:row;align-items:center;justify-content:space-between;gap:8px}
+.weeks-grid .input{width:130px}
+.diff{color:var(--status-warning);font-size:12.5px}
+.preview{border:1px solid var(--border-subtle);border-radius:var(--radius-control);padding:10px 12px;background:var(--surface-subtle)}
+.preview ul{margin:6px 0 0;padding-left:18px}
+.radios{display:flex;gap:16px;flex-wrap:wrap}
+.radios label{display:flex;gap:6px;align-items:center;min-height:28px;cursor:pointer}
+
+/* How to use */
+.how{max-width:760px;padding:24px 0 48px}
+.how h2{font:var(--display-weight) 32px/1.25 var(--font-display);letter-spacing:var(--display-tracking);margin:0 0 8px}
+.how section{padding:16px 0;border-bottom:1px solid var(--border-subtle)}
+.how h3{font:var(--display-weight) 22px/1.3 var(--font-display);margin:0 0 6px}
+.how p,.how li{font-size:16px;line-height:1.5}
+.how ol,.how ul{padding-left:22px;margin:6px 0}
+.how q{font-style:italic}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--text-primary);color:var(--surface-raised);padding:10px 16px;border-radius:var(--radius-control);box-shadow:var(--shadow-pop);z-index:70;opacity:0;transition:opacity var(--normal) var(--ease);pointer-events:none}
+.toast.show{opacity:1}
+[hidden]{display:none!important}
+
+.goal>div,.nums>.stat{min-width:0}
+main.wrap,.cal-card{min-width:0}
+@media (max-width:1100px){.goal{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:620px){
+  :root{--label-w:88px}
+  .wrap{padding:0 16px}
+  .season h1{font-size:26px}
+  .goal{padding:16px}
+  .nums{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .legend-head,.lrow{grid-template-columns:minmax(0,1fr) 76px 76px 34px;font-size:13px}
+  .season .right{margin-left:0}
+  .nums .stat:first-child{grid-column:1 / -1}
+  .row2{grid-template-columns:1fr}
+  .btn,.tab,.lrow,.menu-list button{min-height:44px}
+  .drawer{top:auto;left:0;width:100%;height:85vh;border-radius:var(--radius-card) var(--radius-card) 0 0;transform:translateY(105%)}
+  .drawer.open{transform:none}
+  .weeks-grid{grid-template-columns:1fr}
+}
+/* ===== Look toggle (both looks) ===== */
+.season .right{flex-wrap:wrap;justify-content:flex-end}
+.look{display:inline-flex;gap:2px;padding:2px;border:1px solid var(--border-strong);border-radius:var(--radius-control);background:var(--surface-raised)}
+.look button{display:inline-flex;align-items:center;gap:4px;min-height:28px;padding:0 10px;border:0;border-radius:calc(var(--radius-control) - 2px);background:transparent;color:var(--text-secondary);font-size:13px;white-space:nowrap;cursor:pointer;transition:background var(--fast) var(--ease)}
+.look button:hover{background:var(--interactive-hover-bg)}
+.look button[aria-pressed="true"]{background:var(--interactive-selected-bg);color:var(--text-primary);font-weight:500}
+.look .icon{width:14px;height:14px;stroke-width:2.5;display:none}
+.look button[aria-pressed="true"] .icon{display:inline-block}
+@media (max-width:620px){.look button{min-height:38px;padding:0 12px}}
+
+/* ===== Commerce7 look: tokens (light) ===== */
+:root[data-look="commerce7"]{
+  --surface-base:#ffffff;--surface-subtle:#f6f7f9;--surface-panel:#eff1f4;--surface-raised:#ffffff;
+  --text-primary:#161c27;--text-secondary:#4d5361;--text-tertiary:#5f6675;--text-link:#0363a6;
+  --border-subtle:#dddfe4;--border-default:#cdd0d6;--border-strong:#7d8492;
+  --action-primary-bg:#0363a6;--action-primary-fg:#ffffff;--action-primary-hover:#054483;
+  --interactive-hover-bg:#ebf6fe;--interactive-selected-bg:#ddeffd;
+  --focus-ring-color:#0363a6;
+  --status-success:#1b7864;--status-success-bg:#e4f2ef;
+  --status-warning:#9a5300;--status-warning-bg:#ffeedb;
+  --status-error:#b13434;--status-error-bg:#fceff0;
+  --accent-editorial-500:#0e7490;
+  --p-club:#b0246b;--p-ecom:#1030ae;--p-corp:#5c5f00;--p-pc:#4d5361;
+  --shadow-sm:0 1px 4px 0 rgba(0,0,0,.1);--shadow-pop:2px 4px 6px 0 rgba(0,0,0,.15);--shadow-lg:0 8px 24px rgba(0,0,0,.2);--scrim:rgba(22,28,39,.5);
+  --font-display:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --display-weight:500;--display-tracking:0;
+  --radius-chip:4px;--radius-control:4px;--radius-input:3px;--radius-card:6px;
+  --c7-primary-edge:#0363a6;--c7-primary-edge-hover:#054483;
+  --c7-secondary-fg:#0363a6;--c7-secondary-edge:#2490d6;--c7-secondary-edge-hover:#2490d6;--c7-secondary-bg:#ffffff;--c7-secondary-hover:#dddfe4;
+  --c7-selected-edge:#0363a6;--c7-selected-fg:#0363a6;
+  --c7-info-bg:#ebf6fe;--c7-info-rule:#0363a6;
+  --c7-field-bg:#ffffff;
+}
+/* dark: follows the file's pattern (OS preference unless data-theme="light", or forced data-theme="dark") */
+@media (prefers-color-scheme:dark){
+  :root[data-look="commerce7"]:not([data-theme="light"]){
+    --surface-base:#161c27;--surface-subtle:#121721;--surface-panel:#292f3d;--surface-raised:#1d232f;
+    --text-primary:#eff1f4;--text-secondary:#cdd0d6;--text-tertiary:#9da3ae;--text-link:#42acf0;
+    --border-subtle:#343946;--border-default:#4d5361;--border-strong:#7a8190;
+    --action-primary-bg:#0363a6;--action-primary-fg:#ffffff;--action-primary-hover:#054483;
+    --interactive-hover-bg:rgba(255,255,255,.05);--interactive-selected-bg:rgba(255,255,255,.08);
+    --focus-ring-color:#42acf0;
+    --status-success:#3fbf9f;--status-success-bg:rgba(35,156,130,.16);
+    --status-warning:#f79448;--status-warning-bg:rgba(247,148,72,.14);
+    --status-error:#ec7a7a;--status-error-bg:rgba(223,95,95,.14);
+    --accent-editorial-500:#4fc3dc;
+    --p-club:#f07ab5;--p-ecom:#8fa1ff;--p-corp:#cfc86a;--p-pc:#cdd0d6;
+    --shadow-sm:0 1px 4px 0 rgba(0,0,0,.6);--shadow-pop:2px 4px 6px 0 rgba(0,0,0,.5);--shadow-lg:0 8px 24px rgba(0,0,0,.6);--scrim:rgba(0,0,0,.6);
+    --c7-primary-edge:#2490d6;--c7-primary-edge-hover:#42acf0;
+    --c7-secondary-fg:#2490d6;--c7-secondary-edge:#2490d6;--c7-secondary-edge-hover:#42acf0;--c7-secondary-bg:#161c27;--c7-secondary-hover:#1d232f;
+    --c7-selected-edge:#42acf0;--c7-selected-fg:#42acf0;
+    --c7-info-bg:rgba(66,172,240,.12);--c7-info-rule:#42acf0;
+    --c7-field-bg:#161c27;
+  }
+}
+:root[data-look="commerce7"][data-theme="dark"]{
+  --surface-base:#161c27;--surface-subtle:#121721;--surface-panel:#292f3d;--surface-raised:#1d232f;
+  --text-primary:#eff1f4;--text-secondary:#cdd0d6;--text-tertiary:#9da3ae;--text-link:#42acf0;
+  --border-subtle:#343946;--border-default:#4d5361;--border-strong:#7a8190;
+  --action-primary-bg:#0363a6;--action-primary-fg:#ffffff;--action-primary-hover:#054483;
+  --interactive-hover-bg:rgba(255,255,255,.05);--interactive-selected-bg:rgba(255,255,255,.08);
+  --focus-ring-color:#42acf0;
+  --status-success:#3fbf9f;--status-success-bg:rgba(35,156,130,.16);
+  --status-warning:#f79448;--status-warning-bg:rgba(247,148,72,.14);
+  --status-error:#ec7a7a;--status-error-bg:rgba(223,95,95,.14);
+  --accent-editorial-500:#4fc3dc;
+  --p-club:#f07ab5;--p-ecom:#8fa1ff;--p-corp:#cfc86a;--p-pc:#cdd0d6;
+  --shadow-sm:0 1px 4px 0 rgba(0,0,0,.6);--shadow-pop:2px 4px 6px 0 rgba(0,0,0,.5);--shadow-lg:0 8px 24px rgba(0,0,0,.6);--scrim:rgba(0,0,0,.6);
+  --c7-primary-edge:#2490d6;--c7-primary-edge-hover:#42acf0;
+  --c7-secondary-fg:#2490d6;--c7-secondary-edge:#2490d6;--c7-secondary-edge-hover:#42acf0;--c7-secondary-bg:#161c27;--c7-secondary-hover:#1d232f;
+  --c7-selected-edge:#42acf0;--c7-selected-fg:#42acf0;
+  --c7-info-bg:rgba(66,172,240,.12);--c7-info-rule:#42acf0;
+  --c7-field-bg:#161c27;
+}
+
+/* ===== Commerce7 look: component adjustments (values come from the tokens above) ===== */
+:root[data-look="commerce7"] body{font-size:14.5px}
+:root[data-look="commerce7"] .caps{font-size:13px;letter-spacing:.02em;line-height:1.3}
+/* Headings: Inter 500 at C7 heading sizes */
+:root[data-look="commerce7"] .season h1{font-size:30px;line-height:1.4}
+:root[data-look="commerce7"] .verdict{font-size:26px;line-height:1.4}
+:root[data-look="commerce7"] .verdict .icon{margin-top:7px}
+:root[data-look="commerce7"] .cal-toolbar h2,
+:root[data-look="commerce7"] .drawer header h2,
+:root[data-look="commerce7"] .dlg header h2,
+:root[data-look="commerce7"] .empty-steps h3{font-size:20px;line-height:1.4}
+:root[data-look="commerce7"] .how h2{font-size:26px;line-height:1.4}
+:root[data-look="commerce7"] .how h3{font-size:18px;line-height:1.4}
+:root[data-look="commerce7"] .how p,:root[data-look="commerce7"] .how li{font-size:15.5px}
+:root[data-look="commerce7"] .strip .sv{font-size:18px}
+:root[data-look="commerce7"] .stat .value{font-size:24px;letter-spacing:0}
+:root[data-look="commerce7"] .stat .input.big{font-size:22px;min-height:48px}
+:root[data-look="commerce7"] .result{font-size:22px}
+/* Season bar and Tabs: page-white header, C7 folder tabs (inactive on surface-alt, active joins the page) */
+:root[data-look="commerce7"] .season .status{margin-bottom:16px}
+:root[data-look="commerce7"] .tabs{gap:4px;padding:0}
+:root[data-look="commerce7"] .tab{min-height:44px;padding:0 20px;margin-bottom:-1px;position:relative;background:var(--surface-subtle);border:1px solid var(--border-default);border-radius:var(--radius-control) var(--radius-control) 0 0;color:var(--text-secondary)}
+:root[data-look="commerce7"] .tab:hover{background:var(--interactive-hover-bg)}
+:root[data-look="commerce7"] .tab[aria-selected="true"]{background:var(--surface-base);color:var(--text-primary);font-weight:500;border-bottom-color:var(--surface-base)}
+:root[data-look="commerce7"] .tab:focus-visible{outline-offset:-3px}
+:root[data-look="commerce7"] .hintbar{background:var(--c7-info-bg);border-bottom:0}
+:root[data-look="commerce7"] .banner.info{background:var(--c7-info-bg);border-color:transparent;border-left:4px solid var(--c7-info-rule)}
+/* Buttons: primary, secondary (blue outline), text */
+:root[data-look="commerce7"] .btn{min-height:36px;padding:0 16px;font-size:15px;font-weight:400;color:var(--c7-secondary-fg);background:var(--c7-secondary-bg);border-color:var(--c7-secondary-edge)}
+:root[data-look="commerce7"] .btn:hover{background:var(--c7-secondary-hover);border-color:var(--c7-secondary-edge-hover)}
+:root[data-look="commerce7"] .btn.small{min-height:32px;padding:0 12px;font-size:14.5px}
+:root[data-look="commerce7"] .btn.primary{background:var(--action-primary-bg);color:var(--action-primary-fg);border-color:var(--c7-primary-edge)}
+:root[data-look="commerce7"] .btn.primary:hover{background:var(--action-primary-hover);border-color:var(--c7-primary-edge-hover)}
+:root[data-look="commerce7"] .btn.ghost,
+:root[data-look="commerce7"] .dlg footer .btn:not(.primary){background:transparent;border-color:transparent;color:var(--text-secondary)}
+:root[data-look="commerce7"] .btn.ghost:hover,
+:root[data-look="commerce7"] .dlg footer .btn:not(.primary):hover{background:var(--interactive-hover-bg);color:var(--text-primary)}
+:root[data-look="commerce7"] .btn[aria-pressed="true"]{background:var(--interactive-selected-bg);border-color:var(--c7-selected-edge);color:var(--c7-selected-fg)}
+:root[data-look="commerce7"] #delBtn{border-color:transparent;background:transparent;color:var(--status-error)}
+:root[data-look="commerce7"] #delBtn:hover{background:var(--status-error-bg)}
+:root[data-look="commerce7"] #delBtn.danger-armed{border-color:var(--status-error)}
+:root[data-look="commerce7"] .btn.danger-armed{color:var(--status-error);border-color:var(--status-error)}
+/* Inputs */
+:root[data-look="commerce7"] .input,:root[data-look="commerce7"] select.input{min-height:40px;padding:8px 12px;background:var(--c7-field-bg);font-size:14.5px}
+:root[data-look="commerce7"] .field label,:root[data-look="commerce7"] .lbl{font-size:14.5px}
+:root[data-look="commerce7"] .stat select.input{min-height:36px;font-size:14px}
+/* Cards, popovers, dialogs */
+:root[data-look="commerce7"] .goal{padding:30px;gap:30px}
+:root[data-look="commerce7"] .menu-list{border-color:var(--border-subtle);padding:4px}
+:root[data-look="commerce7"] .menu-list button{font-size:14.5px;border-radius:3px}
+:root[data-look="commerce7"] .dlg header{padding:24px 30px 12px}
+:root[data-look="commerce7"] .dlg header h2{padding-bottom:0}
+:root[data-look="commerce7"] .dlg .body{padding:8px 30px}
+:root[data-look="commerce7"] .dlg footer{padding:16px 30px 20px}
+:root[data-look="commerce7"] .drawer{border-left-color:var(--border-default)}
+/* Legend rows */
+:root[data-look="commerce7"] .lrow{min-height:38px}
+/* Calendar: table-head style headers, C7 striping */
+:root[data-look="commerce7"] .cal .mh,:root[data-look="commerce7"] .cal .wh{text-transform:uppercase;font-size:12px;font-weight:600;letter-spacing:.02em}
+:root[data-look="commerce7"] .cal .mh{color:var(--text-primary)}
+:root[data-look="commerce7"] .cal .wh{color:var(--text-secondary)}
+:root[data-look="commerce7"] .cal .wh.now{color:var(--text-primary)}
+:root[data-look="commerce7"] .chip{border-left-width:4px}
+:root[data-look="commerce7"] .chip:hover{box-shadow:0 1px 4px 0 rgba(0,0,0,.25)}
+/* Lane defaults table = C7 Table: uppercase 13px/600 heads, odd-row stripe, blue-100 hover */
+:root[data-look="commerce7"] table.ld th{font-size:13px;font-weight:600;text-transform:uppercase;color:var(--text-primary);padding:10px 7px}
+:root[data-look="commerce7"] table.ld td{padding:5px 7px}
+:root[data-look="commerce7"] table.ld tbody tr:nth-child(odd){background:var(--surface-subtle)}
+:root[data-look="commerce7"] table.ld tbody tr:hover{background:var(--interactive-hover-bg)}
+/* Phone: heading sizes step down to heading-4 / heading-3; card padding back to 16px */
+@media (max-width:620px){
+  :root[data-look="commerce7"] .season h1{font-size:18px}
+  :root[data-look="commerce7"] .verdict{font-size:20px}
+  :root[data-look="commerce7"] .verdict .icon{margin-top:4px}
+  :root[data-look="commerce7"] .goal{padding:16px;gap:20px}
+  :root[data-look="commerce7"] .stat .value{font-size:22px}
+  :root[data-look="commerce7"] .dlg header{padding:20px 20px 8px}
+  :root[data-look="commerce7"] .dlg .body{padding:8px 20px}
+  :root[data-look="commerce7"] .dlg footer{padding:14px 20px 16px}
+  :root[data-look="commerce7"] .btn,:root[data-look="commerce7"] .tab{min-height:44px}
+  :root[data-look="commerce7"] .season .right{justify-content:flex-start}
+}
+@media print{
+  @page{size:landscape;margin:12mm}
+  body{background:#fff}
+  .tabs,.right,.hintbar,.drawer,.scrim,.strip,.cal-toolbar .btn,.banner button,#tab-how,.side-actions,details.assump,.toast{display:none!important}
+  .card{box-shadow:none}
+  .cal-frame{overflow:visible}
+  .cal{min-width:0}
+  .cell .plus{display:none!important}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-tick" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5 8.5 10.5 2 17"/><path d="M16 7h6v6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M22 17 13.5 8.5 8.5 13.5 2 7"/><path d="M16 17h6v-6"/></symbol>
+  <symbol id="i-hist" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-dl" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-ul" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></symbol>
+</svg>
+
+<header class="season">
+  <div class="wrap">
+    <div class="titles">
+      <h1 id="heading">Holiday plan</h1>
+      <div class="status" id="status"></div>
+    </div>
+    <div class="right">
+      <div class="look" role="group" aria-label="Look">
+        <button type="button" data-look-set="newvintage" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-tick"/></svg>New Vintage</button>
+        <button type="button" data-look-set="commerce7" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-tick"/></svg>Commerce7</button>
+      </div>
+      <div class="menu">
+        <button class="btn" id="moreBtn" aria-haspopup="true" aria-expanded="false"><svg class="icon"><use href="#i-more"/></svg>More</button>
+        <div class="menu-list" id="moreMenu" role="menu">
+          <button role="menuitem" data-action="csv"><svg class="icon"><use href="#i-dl"/></svg>Download CSV</button>
+          <button role="menuitem" data-action="print"><svg class="icon"><use href="#i-print"/></svg>Print or save as PDF</button>
+          <button role="menuitem" data-action="golive">Connect live data</button>
+          <button role="menuitem" data-action="import"><svg class="icon"><use href="#i-ul"/></svg>Import activities</button>
+          <hr>
+          <button role="menuitem" data-action="lastyear">Edit last year</button>
+          <button role="menuitem" data-action="startown">Start my own</button>
+          <button role="menuitem" data-action="reset" id="resetBtn">Reset to example</button>
+        </div>
+      </div>
+      <a class="logo-pill" href="https://newvintage.ai/?utm_source=holiday-planner&amp;utm_medium=referral&amp;utm_campaign=c7-webinar-2026&amp;utm_content=season-bar-logo&amp;utm_term=generic-ai" target="_blank" rel="noopener" aria-label="New Vintage"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='130 130 1717 575' fill='none'%3E%3Cg clip-path='url(%23a)'%3E%3Crect width='550' height='550' x='140' y='140' fill='%23fff' rx='275'/%3E%3Cpath fill='url(%23b)' d='M140  415a275  275  0  1  1  550  0H140'/%3E%3Cpath fill='%230b6623' d='M-27  420.9  404.2  526.2c8  1.9  3.3-7.1  11.3-5.2  7.7  1.9  16.8-1  23.3-5.5  6.5-4.5  22.7 .6  24.2-7.7s-.2-16.8-4.7-23.3c-4.5-6.5-11.6-10.6-19.5-11.5l-489.8-58zM809.7  426.4l-471.9  341.9c-12.9  9.4-28.6  12.8-44  8.8-15.4-4-29.2-15.2-38.1-30.3-8.8-15.1-11.8-32.7-7.7-48  4-15.4  14.7-27.4  29.2-34l27.9-12.8  501.6-230.7  27.9-12.8z'/%3E%3Cpath fill='%230b6623' d='m217.8  623.4-32.7  11c-15.1  5.1-31.2  3.7-44.7-4.6-13.6-8.3-23.6-22.8-27.6-39.7-4.1-16.8-1.8-34.4  6.5-47.9  8.3-13.6  21.9-22.1  37.7-24.5l34.1-5.1  613.9-92.4  34.1-5.1z'/%3E%3Cpath fill='%230b6623' d='M17.8  418  1255.6  471.5l68.8  3c8 .3  15.6-2.5  21.4-8  5.7-5.5  9.1-13.2  9.2-21.3 .2-8.1-2.8-16-8.3-21.7-5.5-5.7-13.1-8.9-21-8.9l-68.8 0-1239 .4-68.8 0z'/%3E%3C/g%3E%3Cpath fill='%23222' d='M1154  200.1h37.2l31.1  118.8h.6l29.9-118.8h35.4l28.6  118.8h.6l32.3-118.8h35.7l-49.9  159.1h-36l-29.5-118.2h-.6l-29.2  118.2h-36.9zM1111.3  265.6a53.5  53.5  0  0  0-3.7-16c-1.8-5.1-4.5-9.5-8-13.2-3.3-3.9-7.4-7-12.3-9.2-4.7-2.5-10.1-3.7-16-3.7q-9.2  0-16.9  3.4a37.5  37.5  0  0  0-12.9  8.9c-3.5  3.7-6.4  8.1-8.6  13.2-2  5.1-3.2  10.7-3.4  16.6zm-81.8  23.1q0  9.2  2.5  17.8c1.8  5.7  4.5  10.8  8  15.1  3.5  4.3  7.9  7.8  13.2  10.5q8  3.7  19.1  3.7c10.2  0  18.5-2.2  24.6-6.5q9.5-6.8  14.2-20h33.2q-2.8  12.9-9.5  23.1c-4.5  6.8-9.9  12.5-16.3  17.2q-9.5  6.8-21.5  10.2c-7.8  2.5-16  3.7-24.6  3.7-12.5  0-23.6-2.1-33.2-6.2-9.6-4.1-17.8-9.8-24.6-17.2-6.6-7.4-11.6-16.2-15.1-26.5q-4.9-15.4-4.9-33.8  0-16.9  5.2-32c3.7-10.3  8.8-19.2  15.4-26.8  6.8-7.8  14.9-13.9  24.3-18.5  9.4-4.5  20.1-6.8  32-6.8q18.8  0  33.5  8  15.1  7.7  24.9  20.6c6.6  8.6  11.3  18.6  14.2  29.8q4.6  16.6  2.5  34.5zM830  200.1h33.2v23.4l.6 .6q8-13.2  20.9-20.6  12.9-7.7  28.6-7.7  26.2  0  41.2  13.5t15.1  40.6v109.2h-35.1V259.1q-.6-18.8-8-27.1-7.4-8.6-23.1-8.6-8.9  0-16  3.4-7.1  3.1-12  8.9-4.9  5.5-7.7  13.2t-2.8  16.3v93.8H830zM1801.2  537.6a53.2  53.2  0  0  0-3.7-16c-1.8-5.1-4.5-9.5-8-13.2q-4.9-5.8-12.3-9.2c-4.7-2.5-10.1-3.7-16-3.7-6.2  0-11.8  1.1-16.9  3.4a37.5  37.5  0  0  0-12.9  8.9c-3.5  3.7-6.4  8.1-8.6  13.2-2  5.1-3.2  10.7-3.4  16.6zm-81.8  23.1q0  9.2  2.5  17.8c1.9  5.7  4.5  10.8  8  15.1q5.2  6.5  13.2  10.5  8  3.7  19.1  3.7c10.3  0  18.5-2.2  24.6-6.5q9.5-6.8  14.2-20h33.2q-2.8  12.9-9.5  23.1c-4.5  6.8-9.9  12.5-16.3  17.2q-9.5  6.8-21.5  10.2c-7.8  2.5-16  3.7-24.6  3.7-12.5  0-23.6-2.1-33.2-6.2s-17.9-9.8-24.6-17.2c-6.6-7.4-11.6-16.2-15.1-26.5q-4.9-15.4-4.9-33.8c0-11.3  1.7-21.9  5.2-32q5.5-15.4  15.4-26.8  10.2-11.7  24.3-18.5  14.2-6.8  32-6.8  18.8  0  33.5  8c10.1  5.1  18.4  12  24.9  20.6  6.6  8.6  11.3  18.6  14.2  29.8q4.6  16.6  2.5  34.5zM1661.3  622.8q0  36-20.3  53.5c-13.3  11.9-32.6  17.8-57.9  17.8q-12  0-24.3-2.5c-8-1.6-15.4-4.4-22.2-8.3-6.6-3.9-12.1-9-16.6-15.4-4.5-6.4-7.2-14.2-8-23.4h35.1c1  4.9  2.8  8.9  5.2  12  2.5  3.1  5.3  5.4  8.6  7.1  3.5  1.8  7.3  3  11.4  3.4  4.1 .6  8.4 .9  12.9 .9q21.2  0  31.1-10.5  9.8-10.5  9.8-30.2v-24.3h-.6q-7.4  13.2-20.3  20.6-12.6  7.4-27.4  7.4c-12.7  0-23.6-2.2-32.6-6.5-8.8-4.5-16.2-10.6-22.2-18.2-5.7-7.8-9.9-16.7-12.6-26.8-2.7-10.1-4-20.8-4-32.3q0-16  4.9-30.5c3.3-9.6  8-18.1  14.2-25.2q9.2-11.1  22.5-17.5c9-4.3  19.2-6.5  30.5-6.5q15.1  0  27.7  6.5c8.4  4.1  14.9  10.7  19.4  19.7h.6v-21.8h35.1zm-77.8-19.4c7.8  0  14.4-1.5  19.7-4.6q8.3-4.9  13.2-12.6c3.5-5.3  6-11.3  7.4-17.8q2.5-10.2  2.5-20.3  0-10.2-2.5-19.7c-1.6-6.4-4.2-12-7.7-16.9q-4.9-7.4-13.2-11.7c-5.3-2.9-11.8-4.3-19.4-4.3-7.8  0-14.4  1.6-19.7  4.9s-9.6  7.6-12.9  12.9q-4.9  7.7-7.1  17.8-2.2  9.8-2.2  19.7c0  6.6 .8  13  2.5  19.4q2.5  9.2  7.4  16.6c3.5  4.9  7.8  8.9  12.9  12q8  4.6  19.1  4.6M1479.5  595.8c0  4.3 .5  7.4  1.5  9.2  1.2  1.8  3.5  2.8  6.8  2.8h3.7c1.4  0  3.1-.2  4.9-.6v24.3c-1.2 .4-2.9 .8-4.9  1.2a49  49  0  0  1-5.8  1.5c-2 .4-4.1 .7-6.2 .9s-3.8 .3-5.2 .3c-7.2  0-13.1-1.4-17.8-4.3q-7.1-4.3-9.2-15.1c-7  6.8-15.6  11.7-25.8  14.8-10.1  3.1-19.8  4.6-29.2  4.6-7.2  0-14.1-1-20.6-3.1-6.6-1.8-12.4-4.6-17.5-8.3q-7.4-5.8-12-14.5c-2.9-5.9-4.3-12.8-4.3-20.6  0-9.8  1.8-17.8  5.2-24  3.7-6.2  8.4-11  14.2-14.5  6-3.5  12.5-5.9  19.7-7.4a208  208  0  0  1  22.2-3.7c6.3-1.2  12.4-2.1  18.1-2.5  5.7-.6  10.8-1.5  15.1-2.8  4.5-1.2  8-3.1  10.5-5.5  2.7-2.7  4-6.6  4-11.7q0-6.8-3.4-11.1c-2-2.9-4.7-5-8-6.5-3.1-1.6-6.6-2.7-10.5-3.1-3.9-.6-7.6-.9-11.1-.9-9.8  0-17.9  2.1-24.3  6.2q-9.5  6.2-10.8  19.1h-35.1q.9-15.4  7.4-25.5c4.3-6.8  9.8-12.2  16.3-16.3q10.2-6.2  22.8-8.6c8.4-1.6  17-2.5  25.9-2.5  7.8  0  15.5 .8  23.1  2.5s14.4  4.3  20.3  8c6.2  3.7  11.1  8.5  14.8  14.5  3.7  5.7  5.5  12.8  5.5  21.2zm-35.1-44.3c-5.3  3.5-11.9  5.6-19.7  6.5-7.8 .6-15.6  1.6-23.4  3.1a64  64  0  0  0-10.8  2.8c-3.5  1-6.6  2.6-9.2  4.6-2.7  1.8-4.8  4.4-6.5  7.7q-2.2  4.6-2.2  11.4  0  5.8  3.4  9.8a27  27  0  0  0  8  6.5c3.3  1.4  6.8  2.5  10.5  3.1  3.9 .6  7.4 .9  10.5 .9  3.9  0  8.1-.5  12.6-1.5a40.1  40.1  0  0  0  12.6-5.2c4.1-2.5  7.5-5.5  10.2-9.2  2.7-3.9  4-8.6  4-14.2zM1230.9  472.1h26.5v-47.7h35.1v47.7h31.7v26.2h-31.7v84.9c0  3.7 .1  6.9 .3  9.5 .4  2.7  1.1  4.9  2.1  6.8  1.2  1.8  3  3.3  5.2  4.3  2.3 .8  5.3  1.2  9.2  1.2h7.4q3.7-.3  7.4-1.2v27.1c-3.9 .4-7.7 .8-11.4  1.2-3.7 .4-7.5 .6-11.4 .6-9.2  0-16.7-.8-22.5-2.5q-8.3-2.8-13.2-7.7c-3.1-3.5-5.2-7.8-6.5-12.9-1-5.1-1.6-11-1.9-17.5v-93.8h-26.5zM1073.3  472.1h33.2v23.4l.6 .6c5.3-8.8  12.3-15.7  20.9-20.6  8.6-5.1  18.1-7.7  28.6-7.7  17.4  0  31.2  4.5  41.2  13.5  10.1  9  15.1  22.6  15.1  40.6v109.2h-35.1V531.2c-.4-12.5-3.1-21.5-8-27.1-4.9-5.7-12.6-8.6-23.1-8.6-6  0-11.3  1.1-16  3.4q-7.1  3.1-12  8.9c-3.3  3.7-5.8  8.1-7.7  13.2q-2.8  7.7-2.8  16.3v93.8h-35.1zM1003.1  411.5h35.1v33.2h-35.1zm0  60.6h35.1v159.1h-35.1zM830  472.1h38.2l40.3  122.2h.6l38.8-122.2h36.3l-56.9  159.1h-39.4z'/%3E%3Cdefs%3E%3CradialGradient id='b' cx='0' cy='0' r='1' gradientTransform='matrix(0 -252.5 245.861 0 415 392.5)' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23ffc720'/%3E%3Cstop offset='1' stop-color='%23ffbf00' stop-opacity='.96'/%3E%3C/radialGradient%3E%3CclipPath id='a'%3E%3Crect width='550' height='550' x='140' y='140' fill='%23fff' rx='275'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E" alt="" width="78" height="26"></a>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button class="tab" role="tab" id="tabPlan" aria-selected="true" aria-controls="tab-plan" data-action="tab" data-tab="plan">Plan</button>
+      <button class="tab" role="tab" id="tabHow" aria-selected="false" aria-controls="tab-how" data-action="tab" data-tab="how">How to use</button>
+    </nav>
+  </div>
+</header>
+<div class="hintbar" id="hintbar" hidden><div class="wrap">New here? <button class="linkbtn" data-action="tab" data-tab="how">Start with How to use.</button><span class="grow" style="flex:1"></span><button class="btn ghost small" data-action="dismiss-hint" aria-label="Dismiss"><svg class="icon"><use href="#i-x"/></svg></button></div></div>
+
+<div class="strip" id="strip" aria-hidden="true"><div class="wrap" id="stripInner"></div></div>
+
+<main class="wrap">
+  <section id="tab-plan" role="tabpanel" aria-labelledby="tabPlan">
+    <div id="banners"></div>
+    <section class="card goal" id="goalCard" aria-label="Goal">
+      <div>
+        <div aria-live="polite" id="live">
+          <p class="verdict" id="verdict"></p>
+        </div>
+        <div class="nums">
+          <div class="stat">
+            <div class="caps">Revenue goal</div>
+            <input class="input big" id="goalInput" inputmode="numeric" aria-label="Revenue goal">
+          </div>
+          <div class="stat">
+            <div class="caps">Planned revenue</div>
+            <div class="value" id="plannedVal"></div>
+            <div class="sub">Calculated</div>
+          </div>
+          <div class="stat">
+            <div class="caps">Actual revenue</div>
+            <input class="input big" id="actualInput" inputmode="numeric" aria-label="Actual revenue" placeholder="">
+            <div class="sub" id="actualSub">Total from your sales report. You update this weekly.</div>
+            <label class="sub" for="btSelect" style="display:block;margin-top:8px">Booked through</label><select class="input" id="btSelect" style="margin-top:4px"></select>
+            <div class="warn-note" id="overNote" hidden></div>
+          </div>
+        </div>
+        <div class="gbar-wrap" id="gbarWrap"></div>
+        <div class="lines">
+          <div class="line" id="lyLine"></div>
+          <div class="line" id="paceLine"></div>
+        </div>
+      </div>
+      <div>
+        <div class="legend" id="legend"></div>
+        <div class="hint" style="padding:6px 8px 0">Click a program to filter the calendar.</div>
+        <div class="side-actions">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><button class="btn" id="needsBtn" data-action="needs" aria-pressed="false"></button><span class="hint" id="completeLine"></span></div>
+          <details class="assump" id="assump">
+            <summary><svg class="icon"><use href="#i-chev"/></svg>Assumptions</summary>
+            <div class="assump-body">
+              <div class="field">
+                <label for="haircut">Overlap discount: <b id="haircutVal"></b></label>
+                <input type="range" class="range" id="haircut" min="0" max="40" step="5">
+                <div class="hint" id="haircutHint"></div>
+              </div>
+              <div>
+                <div class="lbl" style="margin-bottom:4px">Lane defaults</div>
+                <table class="ld" id="ldTable"></table>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="card cal-card" aria-label="Calendar">
+      <div class="cal-toolbar">
+        <h2>Calendar</h2>
+        <button class="btn primary small" data-action="add"><svg class="icon"><use href="#i-plus"/></svg>Add activity</button>
+        <span class="grow"></span>
+        <span class="hint" id="filterNote"></span>
+        <button class="btn small" id="densityBtn" data-action="density" aria-pressed="false">Compact</button>
+      </div>
+      <div id="emptySteps"></div>
+      <div class="cal-frame"><div class="cal" id="cal"></div></div>
+    </section>
+    <p class="hint" style="margin:12px 0 32px">Typed numbers are yours to keep current. Figures marked Calculated come from them.</p>
+  </section>
+
+  <section id="tab-how" role="tabpanel" aria-labelledby="tabHow" hidden>
+    <div class="how">
+      <h2>How to use this planner</h2>
+      <p class="muted">A two-minute tour. Everything here saves as you go.</p>
+      <section><h3>1. What this page answers</h3><p>Does your October–December plan reach your revenue goal, and how is the season tracking? The verdict at the top says it in one sentence, and it updates as you change anything.</p></section>
+      <section><h3>2. Reading the verdict and goal bar</h3><p>The bar shows planned revenue split by program. The solid tick is your goal, the dashed tick is last year, and the triangle is actual revenue so far. The program list beside it shows planned and actual revenue for each program. Click one to filter the calendar.</p></section>
+      <section><h3>3. Adding and editing activities</h3><p>Click an empty spot in a lane to add an activity right there, in that lane and week. Click any chip to open it. Change its lane or start week with the dropdowns. List size, conversion and average order make its projected revenue.</p></section>
+      <section><h3>4. Bringing in your own calendar (import)</h3>
+        <ol>
+          <li>Choose More, then Import activities, then Download the template.</li>
+          <li>Open it in Excel or Google Sheets. Put one activity on each row: its title, lane, start week and so on. Keep the column headings.</li>
+          <li>Save or download it as CSV.</li>
+          <li>Back here, choose Import activities, pick the file, then choose Add to my plan or Replace my plan.</li>
+          <li>Check the preview. It lists any rows that need fixing. Then press Import.</li>
+        </ol>
+        <p>Your goal, key dates and last year stay as they are.</p></section>
+      <section><h3>5. Typed vs Calculated, and your weekly habit</h3><p>You type the plan, the goal and actuals. Anything marked Calculated comes from those. Each week:</p>
+        <ul><li>update actual revenue and the booked-through week</li><li>add actuals to activities that have finished</li><li>check pacing</li></ul></section>
+      <section><h3>6. Make it yours by asking</h3><p>You can ask the assistant in the chat where you built this page. For example:</p>
+        <ul><li><q>Add a Black Friday SMS to SMS subscribers in the week of Nov 23.</q></li><li><q>Change the club shipment list size to 2,300.</q></li><li><q>Add a wholesale program.</q></li></ul>
+        <p>It updates the page for you. If you've edited here since, download the CSV and attach it to your request, so it starts from your latest plan.</p></section>
+      <section><h3>7. Making the numbers live</h3><p>When you're ready, turn on the New Vintage connector in Claude and say <q>Connect my planner to New Vintage</q> in this chat. Actual revenue, last year and each email and SMS result then fill in from your systems. You can still type any number yourself. More, then Connect live data, has the steps.</p></section>
+      <section><h3>8. Saving and sharing</h3><ul><li>Changes save by themselves.</li><li>Download CSV opens in Excel or Google Sheets.</li><li>Print or save as PDF for sharing.</li></ul></section>
+      <p style="margin-top:20px"><button class="btn primary" data-action="tab" data-tab="plan">Go to my plan</button></p>
+    </div>
+  </section>
+</main>
+
+<div class="scrim" id="scrim" data-action="close-drawer"></div>
+<aside class="drawer" id="drawer" aria-label="Activity" aria-hidden="true"></aside>
+
+<dialog id="dlgLY"><form class="dlg" method="dialog" id="formLY"></form></dialog>
+<dialog id="dlgImport"><div class="dlg" id="importBody"></div></dialog>
+<dialog id="dlgOwn"><form class="dlg" method="dialog" id="formOwn"></form></dialog>
+<dialog id="dlgLive"><div class="dlg"><header><h2>Connect live data</h2><p>Right now you type every number. With New Vintage connected, actual revenue, last year, lane defaults and each email and SMS result fill in from Commerce7, Klaviyo, Mailchimp and RedChirp, and update when you open this page.</p></header>
+  <div class="body"><ol style="margin:0;padding-left:20px;display:grid;gap:8px">
+    <li>Turn on the New Vintage connector in Claude's settings (a New Vintage Pro account).</li>
+    <li>In the chat where you built this planner, say <q>Connect my planner to New Vintage.</q> You may be asked to upload one more file, from wherever you got this planner.</li>
+    <li>Answer a few questions, such as how your winery marks corporate gifting orders. Your activities stay as they are.</li></ol>
+    <p class="hint" style="margin:0">Anything synced can still be typed by hand, and events stay typed.</p></div>
+  <footer><a class="btn" href="https://newvintage.ai/?utm_source=holiday-planner&amp;utm_medium=referral&amp;utm_campaign=c7-webinar-2026&amp;utm_content=connect-live-data&amp;utm_term=generic-ai" target="_blank" rel="noopener">About New Vintage</a><button class="btn primary" data-action="close-dialog">Got it</button></footer></div></dialog>
+<dialog id="dlgKey"><form class="dlg" method="dialog" id="formKey"></form></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- constants ---------- */
+const LANES=[
+  {id:'key',label:'Key dates',rev:false},
+  {id:'camp',label:'Campaign theme',rev:false},
+  {id:'email',label:'Email',rev:true},
+  {id:'sms',label:'SMS',rev:true},
+  {id:'outreach',label:'Direct outreach',rev:true},
+  {id:'club',label:'Club',rev:true},
+  {id:'event',label:'Events & tasting room',rev:true,fixed:true}
+];
+const LANE=Object.fromEntries(LANES.map(l=>[l.id,l]));
+const ACT_LANES=LANES.filter(l=>l.id!=='key');
+const PROGRAMS=[
+  {id:'club',label:'Club',short:'Club'},
+  {id:'ecom',label:'Ecommerce',short:'Ecom'},
+  {id:'corp',label:'Corporate gifting',short:'Corp'},
+  {id:'pc',label:'Private client',short:'Private'}
+];
+const PROG=Object.fromEntries(PROGRAMS.map(p=>[p.id,p]));
+const DAY=86400000;
+const HANUKKAH={2025:'12-14',2026:'12-04',2027:'12-24',2028:'12-12',2029:'12-01',2030:'12-20'};
+const STORE_KEY='holiday-planner';
+const DEFAULT_LANE={email:{conv:0.8,aov:220},sms:{conv:1.8,aov:210},outreach:{conv:20,aov:800},club:{conv:10,aov:265},event:{conv:20,aov:150}};
+
+/* ---------- dates ---------- */
+const qs=new URLSearchParams(location.search);
+function parseISO(s){const [y,m,d]=s.split('-').map(Number);return new Date(Date.UTC(y,m-1,d));}
+function iso(d){return d.toISOString().slice(0,10);}
+function todayUTC(){const t=qs.get('today');if(t)return parseISO(t);const n=new Date();return new Date(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate()));}
+const TODAY=todayUTC();
+function seasonStartFor(year){const d=new Date(Date.UTC(year,9,1));const dow=d.getUTCDay();const add=(8-dow)%7;return new Date(d.getTime()+add*DAY);}
+function seasonYearDefault(){const y=TODAY.getUTCFullYear();const end=new Date(seasonStartFor(y).getTime()+91*DAY);return TODAY>end?y+1:y;}
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function md(d){return MON[d.getUTCMonth()]+' '+d.getUTCDate();}
+function weekStart(i){return new Date(parseISO(state.seasonStart).getTime()+i*7*DAY);}
+function weekLabel(i){return 'Week of '+md(weekStart(i));}
+function defaultKeyDates(year){
+  const nov1=new Date(Date.UTC(year,10,1));const firstThu=1+((4-nov1.getUTCDay()+7)%7);const tg=firstThu+21;
+  const mk=(id,label,m,d,kind)=>({id,label,date:iso(new Date(Date.UTC(year,m,d))),kind});
+  const h=HANUKKAH[year]?HANUKKAH[year].split('-').map(Number):null;
+  return [mk('k-hal','Halloween',9,31,'holiday'),mk('k-tg','Thanksgiving',10,tg,'holiday'),mk('k-bf','Black Friday',10,tg+1,'holiday'),mk('k-cm','Cyber Monday',10,tg+4,'holiday'),
+    ...(h?[mk('k-han','Hanukkah',h[0]-1,h[1],'holiday')]:[]),mk('k-xmas','Christmas',11,25,'holiday'),
+    mk('k-corp','Corporate order-by',10,6,'corpOrderBy'),mk('k-ground','Ground cutoff',11,15,'groundCutoff'),mk('k-2day','2-day cutoff',11,21,'twoDayCutoff')];
+}
+
+/* ---------- example ---------- */
+const EX_CSV=`t1,camp,0,2,Fall release,ecom,All contacts,"Story first, new vintages",,,,false,,
+t2,camp,2,2,Cellar sale,ecom,All contacts,"Mystery cases, library bottles",,,,false,,
+t4,camp,6,4,Holiday gifting & entertaining,ecom,All contacts,Gift packs from $95,,,,false,,
+t5,camp,10,2,Last call & gift cards,ecom,All contacts,Free 2-day over $250,,,,false,,
+e1,email,1,1,Fall release,ecom,Past purchasers,Free shipping on 6+,8400,1.2,240,false,,
+e2,email,2,1,Corporate gift program,corp,"Corporate buyers, 3 yrs","Volume pricing on 12+, order by Nov 6",340,9,1450,false,,
+e3,email,2,1,Cellar sale opens,ecom,All contacts,Mystery case $199,26500,0.5,199,false,,
+e5,email,4,1,Thanksgiving wines,ecom,All contacts,Pairing three-pack,26500,0.5,165,false,,
+e7,email,6,1,Holiday gift guide,ecom,All contacts,Shipping included over $250,26500,0.9,260,false,,
+e8,email,7,1,Black Friday,ecom,"All contacts, excl. Top 500",20% off 6+ bottles,26000,1.4,230,false,,
+e9,email,8,1,Cyber Monday,ecom,"Past purchasers, excl. club",30% off + $5 shipping,6300,1.3,210,false,,
+e11,email,9,1,Last chance for gift packs,ecom,"All contacts, excl. this season's buyers",Shipping included over $250,23900,0.5,250,false,,
+s1,sms,7,1,"Black Friday, 9am",ecom,SMS subscribers,20% off 6+ bottles,3800,2.4,225,false,,
+s2,sms,10,1,48 hours to ground cutoff,ecom,SMS subscribers,Free 2-day over $250,3800,1.5,210,false,,
+m1,outreach,3,1,Holiday catalogue in home,pc,Top 500 lifetime,"Reserve allocation, gift packing",500,14,640,false,,
+m2,outreach,5,2,"Personal calls, top 100",pc,Top 100 lifetime,"Hand-picked gift list, we ship",100,30,950,false,,
+c3,club,1,1,Fall shipment bills,club,Club members,Shipment,2100,96,295,true,,
+c5,club,5,1,Member holiday add-on,club,Club members,30% off add-ons,,11,265,false,,
+v1,event,1,1,Fall pickup party,club,"Club members, local",Free to members,900,25,145,false,,
+v3,event,8,1,Holiday pickup & gift wrap,club,"Club members, local",Free to members,900,20,180,false,,`;
+function numOrNull(v){if(v===undefined||v===null)return null;const s=String(v).replace(/[^0-9.\-]/g,'');if(s===''||s==='-'||s==='.')return null;const n=Number(s);return isFinite(n)?n:null;}
+function exampleState(){
+  const year=seasonYearDefault();
+  const acts=parseCSV(EX_CSV).map(r=>({id:r[0],lane:r[1],startWeek:+r[2],weeks:+r[3],title:r[4],program:r[5]||null,audience:r[6],offer:r[7],
+    listSize:numOrNull(r[8]),conversionPct:numOrNull(r[9]),aov:numOrNull(r[10]),billsClubShipment:r[11]==='true',actualRevenue:numOrNull(r[12]),actualOrders:numOrNull(r[13])}));
+  return {schemaVersion:4,planRevision:1,winery:'Example winery',goal:1300000,actual:null,actualThroughWeek:null,overlapDiscountPct:15,
+    seasonStart:iso(seasonStartFor(year)),laneDefaults:JSON.parse(JSON.stringify(DEFAULT_LANE)),keyDates:defaultKeyDates(year),
+    lastYear:{total:1180000,byProgram:{club:640000,ecom:380000,corp:70000,pc:90000},byWeek:[30000,610000,70000,45000,38000,40000,60000,95000,60000,45000,40000,30000,17000]},
+    activities:acts};
+}
+/* The plan this page was built with. A chat edit raises planRevision. */
+const BUILT=exampleState();
+
+/* ---------- CSV ---------- */
+function parseCSV(text){
+  const rows=[];let row=[],f='',q=false;
+  text=text.replace(/^﻿/,'');
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){if(c==='"'){if(text[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}
+    else if(c==='"')q=true;else if(c===','){row.push(f);f='';}
+    else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f='';}
+    else f+=c;}
+  if(f!==''||row.length){row.push(f);rows.push(row);}
+  return rows.filter(r=>r.some(x=>x.trim()!==''));
+}
+function csvCell(v){if(v===null||v===undefined)return '';const s=String(v);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
+
+/* ---------- state + storage ---------- */
+let state=BUILT, prevState=null, storageOK=true, saveTimer=null, updatedFromChat=false;
+const ui={tab:'plan',filter:null,needs:false,compact:false,drawer:null,newId:null};
+const store={
+  async get(){
+    try{if(window.storage&&typeof window.storage.get==='function'){const r=await window.storage.get(STORE_KEY);const v=r&&typeof r==='object'&&'value' in r?r.value:r;return v?JSON.parse(v):null;}}catch(e){}
+    try{const v=localStorage.getItem(STORE_KEY);return v?JSON.parse(v):null;}catch(e){storageOK=false;return null;}
+  },
+  async set(obj){
+    const s=JSON.stringify(obj);
+    try{if(window.storage&&typeof window.storage.set==='function'){await window.storage.set(STORE_KEY,s);return true;}}catch(e){}
+    try{localStorage.setItem(STORE_KEY,s);return true;}catch(e){storageOK=false;return false;}
+  }
+};
+function upgrade(s){
+  if(!s||typeof s!=='object'||!Array.isArray(s.activities))return null;
+  s.schemaVersion=4;
+  if('haircutPct' in s){s.overlapDiscountPct=s.haircutPct;delete s.haircutPct;}
+  if(s.planRevision==null)s.planRevision=1;
+  if(!s.lastYear)s.lastYear={total:null,byProgram:{},byWeek:[]};
+  if(!('actualThroughWeek' in s))s.actualThroughWeek=null;
+  s.activities.forEach(a=>{if(!('actualRevenue' in a))a.actualRevenue=null;if(!('actualOrders' in a))a.actualOrders=null;});
+  if(!s.laneDefaults)s.laneDefaults=JSON.parse(JSON.stringify(DEFAULT_LANE));
+  if(!s.keyDates)s.keyDates=defaultKeyDates(parseISO(s.seasonStart).getUTCFullYear());
+  return s;
+}
+function save(){clearTimeout(saveTimer);saveTimer=setTimeout(async()=>{const ok=await store.set(state);if(!ok){storageOK=false;renderBanners();}},250);}
+
+/* ---------- math ---------- */
+const isRev=a=>LANE[a.lane]&&LANE[a.lane].rev;
+const effConv=a=>a.conversionPct!=null?a.conversionPct:(state.laneDefaults[a.lane]||{}).conv;
+const effAov=a=>a.aov!=null?a.aov:(state.laneDefaults[a.lane]||{}).aov;
+const isComplete=a=>isRev(a)&&a.listSize>0&&effConv(a)>0&&effAov(a)>0;
+const isFixed=a=>a.lane==='event'||(a.lane==='club'&&a.billsClubShipment);
+const gross=a=>isComplete(a)?a.listSize*effConv(a)/100*effAov(a):0;
+const projected=a=>isFixed(a)?gross(a):gross(a)*(1-state.overlapDiscountPct/100);
+function lrRound(obj){
+  const keys=Object.keys(obj);const total=Math.round(keys.reduce((s,k)=>s+obj[k],0));
+  const fl={};keys.forEach(k=>fl[k]=Math.floor(obj[k]+1e-9));
+  let rem=total-keys.reduce((s,k)=>s+fl[k],0);
+  keys.slice().sort((a,b)=>(obj[b]-fl[b])-(obj[a]-fl[a])).forEach(k=>{if(rem>0){fl[k]++;rem--;}});
+  return fl;
+}
+function calc(){
+  const acts=state.activities;
+  const revActs=acts.filter(isRev);
+  const planned=acts.reduce((s,a)=>s+projected(a),0);
+  const plannedR=Math.round(planned);
+  const byProg={club:0,ecom:0,corp:0,pc:0,none:0};
+  const actByProg={club:0,ecom:0,corp:0,pc:0,none:0};
+  let actSum=0,anyAct=false;
+  acts.forEach(a=>{const k=a.program&&PROG[a.program]?a.program:'none';byProg[k]+=projected(a);
+    if(isRev(a)&&a.actualRevenue!=null){anyAct=true;actSum+=a.actualRevenue;actByProg[k]+=a.actualRevenue;}});
+  const progR=lrRound(byProg);
+  const actProgR=lrRound(actByProg);
+  const actual=state.actual!=null?state.actual:(anyAct?actSum:null);
+  const other=actual!=null?Math.max(0,actual-actSum):0;
+  const over=state.actual!=null&&actSum>state.actual?actSum-state.actual:0;
+  const gap=state.goal-plannedR;
+  const bt=state.actualThroughWeek!=null?state.actualThroughWeek:defaultBookedThrough();
+  let ptd=null,pacing=null;
+  if(bt!=null){ptd=acts.reduce((s,a)=>{const p=projected(a);if(!p)return s;let w=0;for(let i=a.startWeek;i<a.startWeek+a.weeks;i++)if(i<=bt)w++;return s+p/a.weeks*w;},0);
+    if(actual!=null)pacing=Math.round(actual-ptd);}
+  const ly=state.lastYear||{};
+  const wkVals=(ly.byWeek||[]).map(numOrNull);
+  const hasWeeks=wkVals.some(v=>v!=null);
+  const progVals=Object.values(ly.byProgram||{}).map(numOrNull);
+  const hasProg=progVals.some(v=>v!=null);
+  const lyTotal=ly.total!=null?ly.total:(hasWeeks?wkVals.reduce((s,v)=>s+(v||0),0):(hasProg?progVals.reduce((s,v)=>s+(v||0),0):null));
+  const lyAtPoint=hasWeeks&&bt!=null?wkVals.slice(0,bt+1).reduce((s,v)=>s+(v||0),0):null;
+  const incomplete=revActs.filter(a=>!isComplete(a));
+  return {planned,plannedR,byProg,progR,actByProg,actProgR,actSum,anyAct,actual,other,over,gap,bt,ptd,pacing,lyTotal,lyAtPoint,hasWeeks,revCount:revActs.length,incomplete};
+}
+function defaultBookedThrough(){
+  const start=parseISO(state.seasonStart);
+  const days=Math.floor((TODAY-start)/DAY);
+  if(days<7)return null;
+  return Math.min(12,Math.floor(days/7)-1);
+}
+function pct(v,base){return Math.round((v-base)/base*100);}
+function signed(n){return (n>0?'+':n<0?'−':'')+Math.abs(n)+'%';}
+
+/* ---------- format ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function money(n){return (n<0?'−':'')+'$'+Math.round(Math.abs(n)).toLocaleString('en-US');}
+function compact(n){const a=Math.abs(n);if(a>=1e6){return '$'+(Math.round(n/1e5)/10).toString()+'M';}if(a>=1e3)return '$'+Math.round(n/1e3)+'K';return '$'+Math.round(n);}
+function icon(id,cls){return `<svg class="icon ${cls||''}" aria-hidden="true"><use href="#i-${id}"/></svg>`;}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2600);}
+
+/* ---------- render: season bar ---------- */
+function renderSeason(){
+  const start=parseISO(state.seasonStart);const end=new Date(start.getTime()+90*DAY);
+  $('#heading').textContent=`${state.winery} · Holiday plan, October–December ${start.getUTCFullYear()}`;
+  let tail;
+  const days=Math.round((start-TODAY)/DAY);
+  if(TODAY<start)tail=days===1?'Starts tomorrow':`Starts in ${days} days`;
+  else if(TODAY>end)tail='Season ended';
+  else tail=`Week ${Math.floor((TODAY-start)/DAY/7)+1} of 13`;
+  $('#status').textContent=`13 weeks · ${md(start)} – ${md(end)} · ${tail}`;
+  document.title=`${state.winery} · Holiday plan`;
+}
+function renderBanners(){
+  const b=[];
+  if(updatedFromChat&&prevState)b.push(`<div class="banner">${icon('hist')}<span>Updated from chat.</span><button class="btn small" data-action="undo-chat">Undo</button></div>`);
+  if(state.winery==='Example winery')b.push(`<div class="banner info"><span><b>Example winery, example figures.</b> Explore freely, then make it yours.</span><button class="btn small primary" data-action="startown">Start my own</button></div>`);
+  if(!storageOK)b.push(`<div class="banner">${icon('alert')}<span>Changes won't be saved in this browser. Use Download CSV to keep a copy.</span></div>`);
+  $('#banners').innerHTML=b.join('');
+}
+
+/* ---------- render: header ---------- */
+function renderHeader(){
+  const c=calc();
+  const v=$('#verdict');
+  if(c.revCount===0||c.plannedR===0){v.className='verdict empty';v.innerHTML=`${icon('clock')}<span>Add activities with numbers to see whether the plan reaches the goal.</span>`;}
+  else if(c.gap>0){v.className='verdict short';v.innerHTML=`${icon('alert')}<span>The plan is ${money(c.gap)} short of the goal.</span>`;}
+  else{v.className='verdict covers';v.innerHTML=`${icon('check')}<span>The plan covers the goal with ${money(-c.gap)} to spare.</span>`;}
+  const gi=$('#goalInput');if(document.activeElement!==gi)gi.value=money(state.goal);
+  $('#plannedVal').textContent=money(c.plannedR);
+  const ai=$('#actualInput');
+  if(document.activeElement!==ai)ai.value=state.actual!=null?money(state.actual):'';
+  ai.placeholder=c.anyAct?money(c.actSum):'$0';
+  $('#actualSub').textContent=state.actual==null&&c.anyAct?'Calculated from activity actuals. Type your total from your sales report to replace it.':'Total from your sales report. You update this weekly.';
+  const bs=$('#btSelect');
+  bs.innerHTML=`<option value="">Choose a week</option>`+Array.from({length:13},(_,i)=>`<option value="${i}" ${c.bt===i?'selected':''}>${weekLabel(i)}</option>`).join('');
+  const on=$('#overNote');on.hidden=!c.over;if(c.over)on.textContent=`Activity actuals add up to ${money(c.over)} more than your total. Check the total or the activity figures.`;
+  // goal bar
+  const scaleMax=Math.max(state.goal||0,c.plannedR,c.lyTotal||0,c.actual||0)*1.04||1;
+  const segs=PROGRAMS.map(p=>c.progR[p.id]>0?`<span style="width:${c.progR[p.id]/scaleMax*100}%;background:var(--p-${p.id})" title="${p.label}: ${money(c.progR[p.id])}"></span>`:'').join('')+(c.progR.none>0?`<span style="width:${c.progR.none/scaleMax*100}%;background:var(--text-tertiary)" title="No program: ${money(c.progR.none)}"></span>`:'');
+  let marks='',key=[];
+  if(state.goal>0){marks+=`<div class="tick" style="left:${state.goal/scaleMax*100}%"></div>`;key.push(`<span class="k"><i class="kg"></i>Goal ${money(state.goal)}</span>`);}
+  if(c.lyTotal){marks+=`<div class="tick ly" style="left:${c.lyTotal/scaleMax*100}%"></div>`;key.push(`<span class="k"><i class="kl"></i>Last year ${money(c.lyTotal)}</span>`);}
+  if(c.actual!=null&&c.actual>0){marks+=`<div class="marker" style="left:${c.actual/scaleMax*100}%"></div>`;key.push(`<span class="k"><i class="ka"></i>Actual ${money(c.actual)}</span>`);}
+  $('#gbarWrap').innerHTML=`<div class="gbar" role="img" aria-label="Planned revenue ${money(c.plannedR)} against goal ${money(state.goal)}">${segs}</div>${marks}<div class="gkey">${key.join('')}</div>`;
+  // legend
+  const share=id=>c.plannedR?Math.round(c.progR[id]/c.plannedR*100)+'%':'—';
+  let L=`<div class="legend-head"><span>Program</span><span>Planned</span><span>Actual</span><span>Share</span></div>`;
+  L+=PROGRAMS.map(p=>`<button class="lrow" data-action="filter" data-prog="${p.id}" aria-pressed="${ui.filter===p.id}"><span class="nm"><span class="sw" style="background:var(--p-${p.id})"></span>${p.label}</span><span class="v">${money(c.progR[p.id])}</span><span class="v a">${c.actByProg[p.id]?money(c.actProgR[p.id]):'—'}</span><span class="s">${share(p.id)}</span></button>`).join('');
+  if(c.progR.none>0)L+=`<div class="lrow static"><span class="nm"><span class="sw" style="background:var(--text-tertiary)"></span>No program</span><span class="v">${money(c.progR.none)}</span><span class="v a">${c.actByProg.none?money(c.actProgR.none):'—'}</span><span class="s">${share('none')}</span></div>`;
+  if(c.other>0)L+=`<div class="lrow static" title="Actual revenue tied to no activity"><span class="nm"><span class="sw" style="background:transparent;border:1.5px solid var(--border-strong)"></span>Other DTC</span><span class="v">—</span><span class="v a">${money(c.other)}</span><span class="s"></span></div>`;
+  $('#legend').innerHTML=L;
+  // last year line
+  const ll=$('#lyLine');
+  if(c.lyTotal){ll.className='line';ll.innerHTML=`${icon('hist')}<span>Last year: ${money(c.lyTotal)} · Goal ${signed(pct(state.goal,c.lyTotal))} · Plan ${signed(pct(c.plannedR,c.lyTotal))}.</span><button class="linkbtn" data-action="lastyear">Edit</button>`;}
+  else{ll.className='line';ll.innerHTML=`${icon('hist')}<button class="linkbtn" data-action="lastyear">Add last year</button><span class="tert">to compare this plan with last season.</span>`;}
+  // pacing
+  const pl=$('#paceLine');
+  if(c.actual==null){pl.className='line';pl.innerHTML=`${icon('clock')}<span class="muted">Pacing starts when you enter actual revenue.</span>`;}
+  else if(c.bt==null){pl.className='line';pl.innerHTML=`${icon('clock')}<span class="muted">Choose the week your actual revenue covers to see pacing.</span>`;}
+  else{const ahead=c.pacing>=0;pl.className='line '+(ahead?'ahead':'behind');
+    pl.innerHTML=`${icon(ahead?'up':'down')}<span>${money(Math.abs(c.pacing))} ${ahead?'ahead of':'behind'} plan through the ${weekLabel(c.bt).replace('Week','week')}${c.lyAtPoint!=null?`<span class="muted"> · Last year at this point: ${money(c.lyAtPoint)}</span>`:''}</span>`;}
+  // needs
+  $('#completeLine').textContent=`${c.revCount-c.incomplete.length} of ${c.revCount} activities have revenue inputs.`;
+  const nb=$('#needsBtn');nb.textContent=ui.needs?'Show all activities':`Show what needs numbers (${c.incomplete.length})`;nb.setAttribute('aria-pressed',ui.needs);nb.disabled=!ui.needs&&c.incomplete.length===0;
+  // assumptions
+  $('#haircut').value=state.overlapDiscountPct;$('#haircutVal').textContent=state.overlapDiscountPct+'%';
+  $('#haircutHint').textContent=`Takes ${state.overlapDiscountPct}% off offers because some customers get several. Club shipments and events aren't reduced.`;
+  const ld=$('#ldTable');
+  if(!ld.contains(document.activeElement)){
+    ld.innerHTML=`<tr><th>Lane</th><th>Conversion %</th><th>Average order</th></tr>`+LANES.filter(l=>l.rev).map(l=>`<tr><td>${l.label}</td><td><input class="input num" data-ld="${l.id}" data-k="conv" value="${state.laneDefaults[l.id].conv}" inputmode="decimal" aria-label="${l.label} conversion %"></td><td><input class="input num" data-ld="${l.id}" data-k="aov" value="${money(state.laneDefaults[l.id].aov)}" inputmode="numeric" aria-label="${l.label} average order"></td></tr>`).join('');
+  }
+  renderStrip(c);
+}
+function renderStrip(c){
+  c=c||calc();
+  const cls=c.plannedR===0?'':(c.gap>0?'short':'covers');
+  const vt=c.plannedR===0?'No plan yet':(c.gap>0?`${money(c.gap)} short of the goal`:`Covers the goal with ${money(-c.gap)} to spare`);
+  $('#stripInner').innerHTML=`<span class="sv ${cls}">${vt}</span><span><span class="tert">Planned</span> <span class="num">${money(c.plannedR)}</span></span><span><span class="tert">Goal</span> <span class="num">${money(state.goal)}</span></span>${c.pacing!=null?`<span><span class="tert">Pacing</span> <span class="num">${c.pacing>=0?'+':'−'}${money(Math.abs(c.pacing)).replace('−','')}</span></span>`:''}`;
+}
+
+/* ---------- render: calendar ---------- */
+function layoutLane(laneId){
+  const acts=state.activities.filter(a=>a.lane===laneId).slice().sort((a,b)=>a.startWeek-b.startWeek||b.weeks-a.weeks);
+  const rows=[];
+  acts.forEach(a=>{let r=rows.findIndex(end=>end<=a.startWeek);if(r===-1){rows.push(0);r=rows.length-1;}rows[r]=a.startWeek+a.weeks;a._row=r;});
+  return {acts,rows:Math.max(1,rows.length)};
+}
+function renderCalendar(){
+  const cal=$('#cal');
+  cal.classList.toggle('compact',ui.compact);
+  const c=calc();
+  const start=parseISO(state.seasonStart);
+  let h='';let r=1;
+  // month header
+  h+=`<div class="lanelbl" style="grid-row:1/3;grid-column:1;justify-content:flex-end"><span class="tert" style="font-size:12px">Lane</span></div>`;
+  let i=0;while(i<13){const m=weekStart(i).getUTCMonth();let j=i;while(j<13&&weekStart(j).getUTCMonth()===m)j++;
+    h+=`<div class="mh" style="grid-row:1;grid-column:${i+2}/${j+2}">${['January','February','March','April','May','June','July','August','September','October','November','December'][m]}</div>`;i=j;}
+  const curWeek=TODAY>=start?Math.floor((TODAY-start)/DAY/7):-1;
+  for(let w=0;w<13;w++)h+=`<div class="wh ${w===curWeek?'now':''}" style="grid-row:2;grid-column:${w+2}">${md(weekStart(w))}</div>`;
+  r=3;
+  const bodyStart=r;
+  // key dates lane rows: stagger labels
+  const kds=state.keyDates.slice().sort((a,b)=>a.date.localeCompare(b.date));
+  const labelRows=[];const kdPos=kds.map(k=>{const d=(parseISO(k.date)-start)/DAY;const pctX=d/91*100;let lr=labelRows.findIndex(x=>pctX-x>9.5);if(lr===-1){labelRows.push(-100);lr=labelRows.length-1;}labelRows[lr]=pctX;return {k,pctX,lr,inSeason:d>=0&&d<91};});
+  const keyH=Math.max(1,labelRows.length)*22+10;
+  h+=`<div class="lanelbl" style="grid-row:${r};grid-column:1"><b>Key dates</b></div>`;
+  for(let w=0;w<13;w++)h+=`<button class="cell key" style="grid-row:${r};grid-column:${w+2};min-height:${keyH}px" data-action="cell" data-lane="key" data-week="${w}" aria-label="Add key date, ${weekLabel(w)}"><span class="plus">+ Add date</span></button>`;
+  const keyRow=r;r++;
+  // lanes
+  ACT_LANES.forEach((lane,li)=>{
+    const L=layoutLane(lane.id);
+    const sub=lane.id==='camp'?'no revenue':(lane.fixed?'no discount':'');
+    h+=`<div class="lanelbl" style="grid-row:${r}/${r+L.rows};grid-column:1"><b>${lane.label}</b>${sub?`<small>${sub}</small>`:''}</div>`;
+    for(let sr=0;sr<L.rows;sr++)for(let w=0;w<13;w++)h+=`<button class="cell ${li%2?'':'alt'}" style="grid-row:${r+sr};grid-column:${w+2}" data-action="cell" data-lane="${lane.id}" data-week="${w}" tabindex="-1" aria-label="Add activity to ${lane.label}, ${weekLabel(w)}"><span class="plus">+ Add</span></button>`;
+    L.acts.forEach(a=>{h+=chipHTML(a,r+a._row,c);});
+    r+=L.rows;
+  });
+  const bodyEnd=r;
+  // overlay
+  let ov=`<div class="overlay" style="grid-row:${bodyStart}/${bodyEnd};grid-column:2/-1">`;
+  kdPos.filter(p=>p.inSeason).forEach(p=>{ov+=`<div class="kd-line" style="left:${p.pctX}%;top:${6+p.lr*22+18}px" aria-hidden="true"></div><button class="kd-label" style="left:${p.pctX}%;top:${6+p.lr*22}px" data-action="keydate" data-id="${p.k.id}" title="${esc(p.k.label)}, ${md(parseISO(p.k.date))}" aria-label="${esc(p.k.label)}, ${md(parseISO(p.k.date))}">${esc(p.k.label)}</button>`;});
+  if(curWeek>=0&&curWeek<13){const d=(TODAY-start)/DAY;ov+=`<div class="today-line" style="left:${d/91*100}%;top:${keyH}px"><span>Today</span></div>`;}
+  ov+=`</div>`;
+  h+=ov;
+  cal.innerHTML=h;
+  $('#densityBtn').textContent=ui.compact?'Expand':'Compact';
+  $('#densityBtn').setAttribute('aria-pressed',ui.compact);
+  $('#filterNote').textContent=ui.filter?`Showing ${PROG[ui.filter].label}. Click it again to clear.`:(ui.needs?'Highlighting activities that need numbers.':'');
+  renderEmpty(c);
+}
+function chipHTML(a,row,c){
+  const p=a.program&&PROG[a.program]?a.program:null;
+  const theme=a.lane==='camp';
+  const inc=isRev(a)&&!isComplete(a);
+  const hasAct=isRev(a)&&a.actualRevenue!=null;
+  let amt='';
+  if(isRev(a)){amt=hasAct?`<span class="amt">${compact(a.actualRevenue)} actual</span>`:(inc?`<span class="need">needs numbers</span>`:`<span class="amt">${compact(projected(a))}</span>`);}
+  const dim=(ui.filter&&a.program!==ui.filter)||(ui.needs&&!inc);
+  const tip=[a.title,a.audience?'Audience: '+a.audience:'',`${weekLabel(a.startWeek)}${a.weeks>1?`, ${a.weeks} weeks`:''}`,isRev(a)&&isComplete(a)?'Plan: '+money(projected(a)):'',hasAct?'Actual: '+money(a.actualRevenue):''].filter(Boolean).join(' · ');
+  return `<button class="chip ${theme?'theme':''} ${dim?'dim':''} ${ui.drawer===a.id?'sel':''} ${ui.needs&&inc?'hl':''}" style="grid-row:${row};grid-column:${a.startWeek+2}/span ${a.weeks};${p?`--pc:var(--p-${p})`:''}" data-action="open" data-id="${a.id}" title="${esc(tip)}" aria-label="${esc(tip)}">
+    <span class="t">${esc(a.title||'Untitled')}</span>
+    <span class="m">${amt}${p&&!theme?`<span class="pg">${PROG[p].short}</span>`:''}${theme?'<span class="pg">Theme</span>':''}</span></button>`;
+}
+function renderEmpty(c){
+  const el=$('#emptySteps');
+  if(state.activities.length){el.innerHTML='';return;}
+  const steps=[
+    [state.activities.length>0,'Add your first activity: click a spot on the calendar, import a spreadsheet, or ask in chat.'],
+    [c.revCount>0&&c.incomplete.length===0,'Fill in the numbers.'],
+    [!!c.lyTotal,'Add last year.'],
+    [c.actual!=null,'Enter actuals each week.']];
+  el.innerHTML=`<div class="empty-steps"><h3>Next steps</h3><ol>${steps.map(([d,t])=>`<li class="${d?'done':''}"><span class="ck">${d?'✓':''}</span>${t}</li>`).join('')}</ol></div>`;
+}
+
+/* ---------- drawer ---------- */
+function actById(id){return state.activities.find(a=>a.id===id);}
+function openDrawer(id,focusTitle){
+  ui.drawer=id;renderDrawer();
+  $('#drawer').classList.add('open');$('#drawer').setAttribute('aria-hidden','false');$('#scrim').classList.add('show');
+  renderCalendar();
+  setTimeout(()=>{const t=$('#f-title');if(t){t.focus();if(focusTitle)t.select();}},170);
+}
+function closeDrawer(){
+  const id=ui.drawer;ui.drawer=null;
+  const a=actById(id);
+  if(a&&id===ui.newId&&!a.title.trim()&&a.listSize==null&&a.actualRevenue==null){state.activities=state.activities.filter(x=>x.id!==id);ui.newId=null;commit();}
+  $('#drawer').classList.remove('open');$('#drawer').setAttribute('aria-hidden','true');$('#scrim').classList.remove('show');
+  renderCalendar();
+  const chip=document.querySelector(`.chip[data-id="${id}"]`);if(chip)chip.focus();
+}
+function renderDrawer(){
+  const a=actById(ui.drawer);const d=$('#drawer');
+  if(!a){d.innerHTML='';return;}
+  const rev=isRev(a);const lane=LANE[a.lane];const ldf=state.laneDefaults[a.lane]||{};
+  const weekOpts=Array.from({length:13},(_,i)=>`<option value="${i}" ${a.startWeek===i?'selected':''}>${weekLabel(i)}</option>`).join('');
+  d.innerHTML=`<header><h2>${a.id===ui.newId?'New activity':'Activity'}</h2><button class="btn ghost small" data-action="close-drawer" aria-label="Close">${icon('x')}</button></header>
+  <div class="body">
+    <div class="grp"><h3>Basics</h3>
+      <div class="field"><label for="f-title">Title</label><input class="input" id="f-title" data-f="title" value="${esc(a.title)}"></div>
+      <div class="row2"><div class="field"><label for="f-lane">Lane</label><select class="input" id="f-lane" data-f="lane">${ACT_LANES.map(l=>`<option value="${l.id}" ${a.lane===l.id?'selected':''}>${l.label}</option>`).join('')}</select></div>
+      <div class="field"><label for="f-start">Start week</label><select class="input" id="f-start" data-f="startWeek">${weekOpts}</select></div></div>
+      <div class="field"><label for="f-weeks">Number of weeks</label><input class="input" id="f-weeks" type="number" min="1" max="${13-a.startWeek}" data-f="weeks" value="${a.weeks}"><div class="hint" id="weeksNote"></div></div>
+    </div>
+    <div class="grp"><h3>Who and why</h3>
+      <div class="field"><label for="f-aud">Audience</label><input class="input" id="f-aud" data-f="audience" value="${esc(a.audience)}" placeholder="Club members"></div>
+      <div class="row2"><div class="field"><label for="f-prog">Program</label><select class="input" id="f-prog" data-f="program"><option value="">None</option>${PROGRAMS.map(p=>`<option value="${p.id}" ${a.program===p.id?'selected':''}>${p.label}</option>`).join('')}</select></div>
+      <div class="field"><label for="f-offer">Offer</label><input class="input" id="f-offer" data-f="offer" value="${esc(a.offer)}"></div></div>
+    </div>
+    ${rev?`<div class="grp"><h3>Plan</h3>
+      <div class="field"><label for="f-list">List size</label><input class="input num" id="f-list" data-f="listSize" inputmode="numeric" value="${a.listSize!=null?a.listSize.toLocaleString('en-US'):''}"></div>
+      <div class="row2">
+        <div class="field"><label for="f-conv">Conversion %</label><input class="input num" id="f-conv" data-f="conversionPct" inputmode="decimal" value="${a.conversionPct!=null?a.conversionPct:''}" placeholder="${ldf.conv}"><div class="hint">${a.conversionPct==null?`Using ${lane.label} default: ${ldf.conv}%`:`<button class="linkbtn" data-action="reset-default" data-k="conversionPct">Reset to default</button>`}</div></div>
+        <div class="field"><label for="f-aov">Average order</label><input class="input num" id="f-aov" data-f="aov" inputmode="numeric" value="${a.aov!=null?money(a.aov):''}" placeholder="${money(ldf.aov)}"><div class="hint">${a.aov==null?`Using ${lane.label} default: ${money(ldf.aov)}`:`<button class="linkbtn" data-action="reset-default" data-k="aov">Reset to default</button>`}</div></div>
+      </div>
+      ${a.lane==='club'?`<label class="switch"><input type="checkbox" data-f="billsClubShipment" ${a.billsClubShipment?'checked':''}> Bills a club shipment</label>`:''}
+    </div>
+    <div class="grp"><h3>Result</h3>
+      <div><div class="result" id="d-proj"></div><div class="calc-tag">Calculated</div></div>
+      <div class="hint" id="d-proj-note"></div>
+    </div>
+    <div class="grp"><h3>Actuals</h3>
+      <div class="row2">
+        <div class="field"><label for="f-arev">Actual revenue</label><input class="input num" id="f-arev" data-f="actualRevenue" inputmode="numeric" value="${a.actualRevenue!=null?money(a.actualRevenue):''}"></div>
+        <div class="field"><label for="f-aord">Actual orders (optional)</label><input class="input num" id="f-aord" data-f="actualOrders" inputmode="numeric" value="${a.actualOrders!=null?a.actualOrders:''}"></div>
+      </div>
+      <div id="d-act"></div>
+    </div>`:''}
+    <div class="actions"><button class="btn" data-action="duplicate">Duplicate</button><button class="btn" data-action="delete" id="delBtn">Delete</button></div>
+  </div>`;
+  updateDrawerCalc();
+}
+function updateDrawerCalc(){
+  const a=actById(ui.drawer);if(!a||!isRev(a))return;
+  const p=projected(a);
+  const pe=$('#d-proj');if(!pe)return;
+  pe.textContent=isComplete(a)?money(p):'Needs numbers';
+  $('#d-proj-note').textContent=!isComplete(a)?'Add list size, conversion and average order to project revenue.':(isFixed(a)?(a.lane==='event'?'Event sales are counted in full, with no overlap discount.':'Club shipments are counted in full, with no overlap discount.'):`${money(gross(a))} before the ${state.overlapDiscountPct}% overlap discount.`);
+  const pg=a.program&&PROG[a.program]?PROG[a.program].label:'No program';
+  let h='';
+  if(a.actualRevenue!=null){
+    if(isComplete(a)&&p>0){const v=Math.round((a.actualRevenue/p-1)*100);h+=`<div class="vs ${v>=0?'up':'down'}" style="font-weight:500">${signed(v)} vs plan</div>`;}
+    if(a.actualOrders>0&&a.listSize>0)h+=`<div class="hint">Actual conversion ${(a.actualOrders/a.listSize*100).toFixed(1)}% · average order ${money(a.actualRevenue/a.actualOrders)}</div>`;
+  }
+  h+=`<div class="hint">Counts toward ${pg}.</div>`;
+  $('#d-act').innerHTML=h;
+}
+function setField(a,f,raw,el){
+  const numF=['listSize','conversionPct','aov','actualRevenue','actualOrders'];
+  if(numF.includes(f)){let n=numOrNull(raw);if(n!=null&&n<0)n=0;if(f==='conversionPct'&&n!=null)n=Math.min(100,Math.round(n*10)/10);a[f]=n;}
+  else if(f==='startWeek'){a.startWeek=+raw;clampWeeks(a);}
+  else if(f==='weeks'){let n=parseInt(raw,10);if(!(n>=1))return;a.weeks=n;clampWeeks(a);}
+  else if(f==='billsClubShipment')a[f]=el.checked;
+  else if(f==='program')a[f]=raw||null;
+  else a[f]=raw;
+}
+function clampWeeks(a){
+  const max=13-a.startWeek;const note=$('#weeksNote');
+  if(a.weeks>max){a.weeks=max;if(note)note.textContent='Shortened to fit the season.';const w=$('#f-weeks');if(w)w.value=a.weeks;}
+  else if(note)note.textContent='';
+  const w=$('#f-weeks');if(w)w.max=max;
+}
+function newActivity(lane,week){
+  const id='a'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+  const a={id,lane,startWeek:week,weeks:1,title:'',audience:'',program:null,offer:'',listSize:null,conversionPct:null,aov:null,billsClubShipment:false,actualRevenue:null,actualOrders:null};
+  state.activities.push(a);ui.newId=id;commit();openDrawer(id,true);
+}
+
+/* ---------- commit ---------- */
+function commit(opts){opts=opts||{};save();renderSeason();renderHeader();renderCalendar();renderBanners();if(opts.drawer==='full')renderDrawer();else if(ui.drawer)updateDrawerCalc();}
+
+/* ---------- dialogs ---------- */
+function openLY(){
+  const ly=state.lastYear||{total:null,byProgram:{},byWeek:[]};
+  const f=$('#formLY');
+  f.innerHTML=`<header><h2>Last year</h2><p>Last season's actual October–December revenue. Weekly figures turn on "last year at this point" in the pacing line.</p></header>
+  <div class="body">
+    <fieldset><legend>Total</legend><div class="field"><label for="ly-total">Total revenue, Oct–Dec</label><input class="input num" id="ly-total" inputmode="numeric" value="${ly.total!=null?money(ly.total):''}"></div></fieldset>
+    <fieldset><legend>By program (optional)</legend><div class="weeks-grid">${PROGRAMS.map(p=>`<div class="field"><label for="ly-p-${p.id}">${p.label}</label><input class="input num" id="ly-p-${p.id}" data-lyp="${p.id}" inputmode="numeric" value="${ly.byProgram&&ly.byProgram[p.id]!=null?money(ly.byProgram[p.id]):''}"></div>`).join('')}</div><div class="diff" id="ly-pdiff"></div></fieldset>
+    <fieldset><legend>By week (optional)</legend><div class="weeks-grid">${Array.from({length:13},(_,i)=>`<div class="field"><label for="ly-w-${i}">${md(weekStart(i))}</label><input class="input num" id="ly-w-${i}" data-lyw="${i}" inputmode="numeric" value="${ly.byWeek&&ly.byWeek[i]!=null?money(ly.byWeek[i]):''}"></div>`).join('')}</div><div class="diff" id="ly-wdiff"></div></fieldset>
+  </div>
+  <footer><button class="btn" value="cancel">Cancel</button><button class="btn primary" value="save" id="ly-save">Save</button></footer>`;
+  const upd=()=>{const t=numOrNull($('#ly-total').value);
+    const ps=[...f.querySelectorAll('[data-lyp]')].map(e=>numOrNull(e.value));const ws=[...f.querySelectorAll('[data-lyw]')].map(e=>numOrNull(e.value));
+    const d=(vals,name,el)=>{const any=vals.some(v=>v!=null);const s=vals.reduce((x,v)=>x+(v||0),0);el.textContent=any&&t!=null&&s!==t?`${name} figures add up to ${money(s)}, ${money(Math.abs(t-s))} ${s<t?'less':'more'} than the total.`:'';};
+    d(ps,'Program',$('#ly-pdiff'));d(ws,'Weekly',$('#ly-wdiff'));};
+  f.oninput=upd;upd();
+  f.onsubmit=e=>{if(e.submitter&&e.submitter.value==='save'){
+    state.lastYear={total:numOrNull($('#ly-total').value),byProgram:Object.fromEntries([...f.querySelectorAll('[data-lyp]')].map(e=>[e.dataset.lyp,numOrNull(e.value)])),byWeek:[...f.querySelectorAll('[data-lyw]')].map(e=>numOrNull(e.value))};
+    commit();toast('Last year saved.');}};
+  $('#dlgLY').showModal();
+}
+let importRows=null;
+function openImport(){
+  importRows=null;
+  $('#importBody').innerHTML=`<header><h2>Import activities</h2><p>Add activities from a spreadsheet. Each row becomes one activity on the calendar. Your goal, key dates and last year stay as they are.</p></header>
+  <div class="body">
+    <div><button class="linkbtn" data-action="template">${''}Download the template</button> <span class="hint">(CSV with two example rows; open it in Excel or Google Sheets)</span></div>
+    <div class="field"><label for="imp-file">Your spreadsheet, saved as CSV</label><input type="file" id="imp-file" accept=".csv,text/csv" class="input"></div>
+    <div class="radios" role="radiogroup" aria-label="Import mode"><label><input type="radio" name="imp-mode" value="add" checked> Add to my plan</label><label><input type="radio" name="imp-mode" value="replace"> Replace my plan</label></div>
+    <div id="imp-preview"></div>
+  </div>
+  <footer><button class="btn" data-action="close-dialog">Cancel</button><button class="btn primary" id="imp-go" data-action="do-import" disabled>Import</button></footer>`;
+  $('#imp-file').onchange=async e=>{const file=e.target.files[0];if(!file)return;const text=await file.text();previewImport(text);};
+  $('#dlgImport').showModal();
+}
+function laneFrom(s){s=(s||'').trim().toLowerCase();if(!s)return null;
+  const m={'campaign theme':'camp','campaign':'camp','theme':'camp','camp':'camp','email':'email','e-mail':'email','sms':'sms','text':'sms','direct outreach':'outreach','outreach':'outreach','direct mail':'outreach','phone':'outreach','club':'club','events & tasting room':'event','events and tasting room':'event','events':'event','event':'event','tasting room':'event'};return m[s]||null;}
+function progFrom(s){s=(s||'').trim().toLowerCase();if(!s)return {ok:true,v:null};const p=PROGRAMS.find(p=>p.id===s||p.label.toLowerCase()===s||p.short.toLowerCase()===s);return p?{ok:true,v:p.id}:{ok:false};}
+function weekFrom(s){s=(s||'').trim();if(!s)return null;
+  if(/^\d{1,2}$/.test(s)){const n=+s;return n>=1&&n<=13?n-1:null;}
+  const start=parseISO(state.seasonStart);let d=null;const y=start.getUTCFullYear();
+  let m;
+  if((m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/)))d=new Date(Date.UTC(+m[1],+m[2]-1,+m[3]));
+  else if((m=s.match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?$/)))d=new Date(Date.UTC(m[3]?(+m[3]<100?2000+ +m[3]:+m[3]):y,+m[1]-1,+m[2]));
+  else if((m=s.match(/^([A-Za-z]{3,})\.?\s+(\d{1,2})(?:,?\s*(\d{4}))?$/))){const mi=MON.findIndex(x=>x.toLowerCase()===m[1].slice(0,3).toLowerCase());if(mi>=0)d=new Date(Date.UTC(m[3]?+m[3]:(mi<6?y+1:y),mi,+m[2]));}
+  if(!d)return null;const w=Math.floor((d-start)/DAY/7);return w>=0&&w<13?w:null;}
+const TEMPLATE_HEAD=['Title','Lane','Start week','Weeks','Audience','Program','Offer','List size','Conversion %','Average order','Bills club shipment','Actual revenue','Actual orders'];
+function previewImport(text){
+  const rows=parseCSV(text);const out=document.getElementById('imp-preview');
+  if(!rows.length){out.innerHTML=`<div class="preview">This file is empty. Download the template to see the columns.</div>`;return;}
+  const head=rows[0].map(h=>h.trim().toLowerCase());
+  const col=n=>head.indexOf(n.toLowerCase());
+  if(col('Title')<0||col('Lane')<0){out.innerHTML=`<div class="preview">This file needs at least Title and Lane columns. Download the template to see the headings to use.</div>`;return;}
+  const get=(r,n)=>{const i=col(n);return i>=0?(r[i]||'').trim():'';};
+  const ready=[],problems=[];
+  rows.slice(1).forEach((r,ix)=>{
+    const lineNo=ix+2;const title=get(r,'Title');const lane=laneFrom(get(r,'Lane'));const sw=weekFrom(get(r,'Start week'));const pr=progFrom(get(r,'Program'));
+    const issue=!title?'needs a title':!lane?'needs a lane':sw==null?'needs a start week in the season':!pr.ok?'has a program this page doesn’t know':null;
+    if(issue){problems.push({lineNo,title:title||'(no title)',issue});return;}
+    let weeks=parseInt(get(r,'Weeks'),10);if(!(weeks>=1))weeks=1;weeks=Math.min(weeks,13-sw);
+    const bill=/^(y|yes|true|1)$/i.test(get(r,'Bills club shipment'));
+    ready.push({id:'i'+Date.now().toString(36)+ix,title,lane,startWeek:sw,weeks,audience:get(r,'Audience'),program:pr.v,offer:get(r,'Offer'),
+      listSize:numOrNull(get(r,'List size')),conversionPct:numOrNull(get(r,'Conversion %')),aov:numOrNull(get(r,'Average order')),billsClubShipment:lane==='club'&&bill,
+      actualRevenue:numOrNull(get(r,'Actual revenue')),actualOrders:numOrNull(get(r,'Actual orders'))});
+  });
+  importRows=ready;
+  const groups={};problems.forEach(p=>{groups[p.issue]=(groups[p.issue]||0)+1;});
+  const summary=`${ready.length} ${ready.length===1?'activity':'activities'} ready`+Object.entries(groups).map(([k,n])=>`, ${n} ${n===1?k:k.replace(/^needs/,'need').replace(/^has/,'have')}`).join('');
+  out.innerHTML=`<div class="preview" id="imp-summary"><b>${summary}</b>${problems.length?`<ul>${problems.map(p=>`<li>Row ${p.lineNo}, ${esc(p.title)}: ${p.issue}</li>`).join('')}</ul><div class="hint" style="margin-top:6px">Rows that need fixing are skipped. Fix them in your spreadsheet and import again, or add them on the calendar.</div>`:''}</div>`;
+  $('#imp-go').disabled=ready.length===0;
+  $('#imp-go').textContent=ready.length?`Import ${ready.length} ${ready.length===1?'activity':'activities'}`:'Import';
+}
+function doImport(){
+  if(!importRows||!importRows.length)return;
+  const mode=document.querySelector('input[name="imp-mode"]:checked').value;
+  if(mode==='replace')state.activities=importRows;else state.activities=state.activities.concat(importRows);
+  const n=importRows.length;importRows=null;$('#dlgImport').close();commit();toast(`Imported ${n} ${n===1?'activity':'activities'}.`);
+}
+function download(name,text,type){const blob=new Blob([text],{type});const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);}
+function actRow(a){return [a.title,LANE[a.lane].label,md(weekStart(a.startWeek)),a.weeks,a.audience,a.program?PROG[a.program].label:'',a.offer,a.listSize,a.conversionPct,a.aov,a.billsClubShipment?'Yes':'No',a.actualRevenue,a.actualOrders];}
+function downloadTemplate(){
+  const rows=[TEMPLATE_HEAD,['Holiday gift guide','Email','Nov 16',1,'All contacts','Ecommerce','Shipping included over $250',26500,0.9,260,'No','',''],['Fall shipment bills','Club','Oct 12',1,'Club members','Club','Shipment',2100,96,295,'Yes','','']];
+  download('holiday-plan-template.csv',rows.map(r=>r.map(csvCell).join(',')).join('\n'),'text/csv');
+}
+function downloadCSV(){
+  const rows=[TEMPLATE_HEAD.concat(['Projected revenue'])].concat(state.activities.filter(a=>a.lane!=='key').sort((a,b)=>a.startWeek-b.startWeek).map(a=>actRow(a).concat([isRev(a)&&isComplete(a)?Math.round(projected(a)):''])));
+  download(`${state.winery.replace(/[^\w]+/g,'-').toLowerCase()}-holiday-plan.csv`,rows.map(r=>r.map(csvCell).join(',')).join('\n'),'text/csv');
+}
+function openOwn(){
+  const kd=id=>(state.keyDates.find(k=>k.id===id)||{}).date||'';
+  const f=$('#formOwn');
+  f.innerHTML=`<header><h2>Start my own</h2><p>This clears the example's activities and last-year figures. It keeps key dates and lane defaults.</p></header>
+  <div class="body">
+    <fieldset><legend>Required</legend>
+      <div class="field"><label for="o-win">Winery name</label><input class="input" id="o-win" value="${state.winery==='Example winery'?'':esc(state.winery)}"></div>
+      <div class="field"><label for="o-goal">Revenue goal (October–December DTC)</label><input class="input num" id="o-goal" inputmode="numeric"></div>
+    </fieldset>
+    <fieldset><legend>Recommended</legend>
+      <div class="field"><label for="o-ly">Last year's Oct–Dec revenue</label><input class="input num" id="o-ly" inputmode="numeric"><div class="hint">You can add program and weekly detail later under More, then Edit last year.</div></div>
+      <div class="row2"><div class="field"><label for="o-corp">Corporate gift order-by</label><input class="input" type="date" id="o-corp" value="${kd('k-corp')}"></div>
+      <div class="field"><label for="o-ground">Ground shipping cutoff</label><input class="input" type="date" id="o-ground" value="${kd('k-ground')}"></div></div>
+      <div class="field"><label for="o-2day">2-day shipping cutoff</label><input class="input" type="date" id="o-2day" value="${kd('k-2day')}"></div>
+    </fieldset>
+    <fieldset><legend>Can wait</legend>
+      <div class="row2"><div class="field"><label for="o-act">Actual revenue so far</label><input class="input num" id="o-act" inputmode="numeric"></div>
+      <div class="field"><label for="o-hc">Overlap discount %</label><input class="input num" id="o-hc" inputmode="numeric" value="${state.overlapDiscountPct}"></div></div>
+      <div class="hint">Lane defaults stay as they are. Change them under Assumptions.</div>
+    </fieldset>
+  </div>
+  <footer><button class="btn" value="cancel">Cancel</button><button class="btn primary" value="go" id="o-go"></button></footer>`;
+  const upd=()=>{const w=$('#o-win').value.trim(),g=numOrNull($('#o-goal').value);const b=$('#o-go');
+    const miss=!w&&!(g>0)?'Add a winery name and revenue goal to continue':!w?'Add a winery name to continue':!(g>0)?'Add a revenue goal to continue':null;
+    b.textContent=miss||'Start my plan';b.disabled=!!miss;};
+  f.oninput=upd;upd();
+  f.onsubmit=e=>{if(!e.submitter||e.submitter.value!=='go')return;
+    const setKD=(id,v)=>{const k=state.keyDates.find(x=>x.id===id);if(k&&v)k.date=v;};
+    setKD('k-corp',$('#o-corp').value);setKD('k-ground',$('#o-ground').value);setKD('k-2day',$('#o-2day').value);
+    state.winery=$('#o-win').value.trim();state.goal=numOrNull($('#o-goal').value);
+    state.lastYear={total:numOrNull($('#o-ly').value),byProgram:{},byWeek:[]};
+    state.actual=numOrNull($('#o-act').value);state.actualThroughWeek=null;
+    const hc=numOrNull($('#o-hc').value);state.overlapDiscountPct=hc==null?15:Math.max(0,Math.min(40,Math.round(hc/5)*5));
+    state.activities=[];ui.filter=null;ui.needs=false;commit();toast('Your plan is ready for its first activity.');};
+  $('#dlgOwn').showModal();
+}
+function openKey(id,week){
+  const k=id?state.keyDates.find(x=>x.id===id):{id:null,label:'',date:iso(weekStart(week)),kind:'holiday'};
+  const f=$('#formKey');
+  f.innerHTML=`<header><h2>${id?'Key date':'New key date'}</h2></header><div class="body">
+    <div class="field"><label for="k-label">Label</label><input class="input" id="k-label" value="${esc(k.label)}" placeholder="Wine club pickup"></div>
+    <div class="field"><label for="k-date">Date</label><input class="input" type="date" id="k-date" value="${k.date}"></div></div>
+    <footer>${id?'<button class="btn" value="delete" style="margin-right:auto">Remove</button>':''}<button class="btn" value="cancel">Cancel</button><button class="btn primary" value="save">Save</button></footer>`;
+  f.onsubmit=e=>{const v=e.submitter&&e.submitter.value;
+    if(v==='delete'){state.keyDates=state.keyDates.filter(x=>x.id!==id);commit();}
+    if(v==='save'){const label=$('#k-label').value.trim()||'Key date';const date=$('#k-date').value;if(!date)return;
+      if(id){k.label=label;k.date=date;}else state.keyDates.push({id:'k'+Date.now().toString(36),label,date,kind:'holiday'});commit();}};
+  $('#dlgKey').showModal();setTimeout(()=>$('#k-label').focus(),30);
+}
+
+/* ---------- events ---------- */
+let resetArmed=null,deleteArmed=null;
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-action]');
+  const menu=$('#moreMenu');
+  if(!e.target.closest('.menu')&&menu.classList.contains('open')){menu.classList.remove('open');$('#moreBtn').setAttribute('aria-expanded','false');}
+  if(e.target.closest('#moreBtn')){const o=menu.classList.toggle('open');$('#moreBtn').setAttribute('aria-expanded',o);return;}
+  if(!t)return;
+  const act=t.dataset.action;
+  const inMenu=!!t.closest('#moreMenu');
+  switch(act){
+    case 'tab':setTab(t.dataset.tab);dismissHint();break;
+    case 'dismiss-hint':dismissHint();break;
+    case 'filter':ui.filter=ui.filter===t.dataset.prog?null:t.dataset.prog;ui.needs=false;renderHeader();renderCalendar();break;
+    case 'needs':ui.needs=!ui.needs;ui.filter=null;renderHeader();renderCalendar();break;
+    case 'density':ui.compact=!ui.compact;renderCalendar();break;
+    case 'add':newActivity('email',Math.max(0,Math.min(12,defaultBookedThrough()!=null?defaultBookedThrough()+1:0)));break;
+    case 'cell':if(t.dataset.lane==='key')openKey(null,+t.dataset.week);else newActivity(t.dataset.lane,+t.dataset.week);break;
+    case 'open':ui.newId=null;openDrawer(t.dataset.id);break;
+    case 'close-drawer':closeDrawer();break;
+    case 'keydate':openKey(t.dataset.id);break;
+    case 'reset-default':{const a=actById(ui.drawer);a[t.dataset.k]=null;commit({drawer:'full'});break;}
+    case 'duplicate':{const a=actById(ui.drawer);const c=JSON.parse(JSON.stringify(a));c.id='a'+Date.now().toString(36);c.title=a.title+' (copy)';c.actualRevenue=null;c.actualOrders=null;state.activities.push(c);ui.newId=null;commit();openDrawer(c.id);toast('Duplicated.');break;}
+    case 'delete':{if(deleteArmed){clearTimeout(deleteArmed);deleteArmed=null;const id=ui.drawer;state.activities=state.activities.filter(a=>a.id!==id);ui.drawer=null;closeDrawer();commit();toast('Activity deleted.');}
+      else{t.textContent='Click again to delete';t.classList.add('danger-armed');deleteArmed=setTimeout(()=>{deleteArmed=null;t.textContent='Delete';t.classList.remove('danger-armed');},3000);}break;}
+    case 'csv':downloadCSV();break;
+    case 'print':window.print();break;
+    case 'import':openImport();break;
+    case 'golive':$('#dlgLive').showModal();break;
+    case 'template':downloadTemplate();break;
+    case 'do-import':doImport();break;
+    case 'close-dialog':t.closest('dialog').close();break;
+    case 'lastyear':openLY();break;
+    case 'startown':openOwn();break;
+    case 'reset':if(resetArmed){clearTimeout(resetArmed);resetArmed=null;t.textContent='Reset to example';state=exampleState();ui.filter=null;ui.needs=false;if(ui.drawer)closeDrawer();commit();menu.classList.remove('open');toast('Example restored.');}
+      else{t.textContent='Click again to reset';resetArmed=setTimeout(()=>{resetArmed=null;t.textContent='Reset to example';},3000);}return;
+    case 'undo-chat':if(prevState){state=prevState;prevState=null;updatedFromChat=false;commit();toast('Restored your saved plan.');}break;
+  }
+  if(inMenu&&act!=='reset'){menu.classList.remove('open');$('#moreBtn').setAttribute('aria-expanded','false');}
+});
+document.addEventListener('input',e=>{
+  const el=e.target;
+  if(el.id==='goalInput'){const n=numOrNull(el.value);if(n!=null){state.goal=n;commit();}return;}
+  if(el.id==='actualInput'){state.actual=numOrNull(el.value);commit();return;}
+  if(el.id==='haircut'){state.overlapDiscountPct=+el.value;commit();return;}
+  if(el.dataset.ld){const n=numOrNull(el.value);if(n!=null){state.laneDefaults[el.dataset.ld][el.dataset.k]=n;commit();}return;}
+  if(el.dataset.f&&el.closest('#drawer')){const a=actById(ui.drawer);if(!a)return;
+    const f=el.dataset.f;if(['lane','startWeek','program','billsClubShipment'].includes(f))return;
+    setField(a,f,el.value,el);commit();}
+});
+document.addEventListener('change',e=>{
+  const el=e.target;
+  if(el.id==='btSelect'){state.actualThroughWeek=el.value===''?null:+el.value;commit();return;}
+  if(el.dataset.f&&el.closest('#drawer')){const a=actById(ui.drawer);if(!a)return;const f=el.dataset.f;
+    if(['lane','startWeek','program','billsClubShipment'].includes(f)){setField(a,f,el.value,el);commit({drawer:'full'});const x=document.getElementById(el.id);if(x)x.focus();}}
+});
+document.addEventListener('focusout',e=>{
+  const el=e.target;
+  if(el.id==='goalInput'&&state.goal!=null)el.value=money(state.goal);
+  if(el.id==='actualInput')el.value=state.actual!=null?money(state.actual):'';
+  if(el.dataset&&el.dataset.ld==='aov'||el.dataset&&el.dataset.ld&&el.dataset.k==='aov'){renderHeader();}
+  if(el.closest&&el.closest('#drawer')&&['aov','actualRevenue'].includes(el.dataset.f)){const a=actById(ui.drawer);if(a&&a[el.dataset.f]!=null)el.value=money(a[el.dataset.f]);}
+  if(el.closest&&el.closest('#drawer')&&el.dataset.f==='listSize'){const a=actById(ui.drawer);if(a&&a.listSize!=null)el.value=a.listSize.toLocaleString('en-US');}
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&ui.drawer&&!document.querySelector('dialog[open]')){e.preventDefault();closeDrawer();return;}
+  const chip=e.target.closest&&e.target.closest('.chip');
+  if(chip&&e.altKey&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){
+    e.preventDefault();const a=actById(chip.dataset.id);
+    if(e.key==='ArrowLeft')a.startWeek=Math.max(0,a.startWeek-1);
+    if(e.key==='ArrowRight')a.startWeek=Math.min(13-a.weeks,a.startWeek+1);
+    const li=ACT_LANES.findIndex(l=>l.id===a.lane);
+    if(e.key==='ArrowUp'&&li>0)a.lane=ACT_LANES[li-1].id;
+    if(e.key==='ArrowDown'&&li<ACT_LANES.length-1)a.lane=ACT_LANES[li+1].id;
+    commit();const c=document.querySelector(`.chip[data-id="${a.id}"]`);if(c)c.focus();}
+});
+function setTab(tab){ui.tab=tab;$('#tab-plan').hidden=tab!=='plan';$('#tab-how').hidden=tab!=='how';$('#tabPlan').setAttribute('aria-selected',tab==='plan');$('#tabHow').setAttribute('aria-selected',tab==='how');window.scrollTo({top:0});}
+function dismissHint(){$('#hintbar').hidden=true;try{localStorage.setItem(STORE_KEY+'.hint','1');}catch(e){}}
+
+/* sticky collapsed strip */
+new IntersectionObserver(([en])=>{const s=$('#strip');const show=!en.isIntersecting&&ui.tab==='plan'&&en.boundingClientRect.top<0;s.classList.toggle('show',show);s.setAttribute('aria-hidden',!show);},{threshold:0}).observe($('#goalCard'));
+
+/* ---------- boot ---------- */
+(async function boot(){
+  let saved=null;
+  if(!qs.has('fresh'))saved=upgrade(await store.get());
+  if(saved){
+    if(saved.planRevision<BUILT.planRevision){prevState=saved;updatedFromChat=true;state=BUILT;}
+    else state=saved;
+  }
+  let hint=true;try{hint=!localStorage.getItem(STORE_KEY+'.hint');}catch(e){}
+  $('#hintbar').hidden=!hint;
+  commit();
+  window.__planner={get state(){return state;},calc,weekFrom,previewImport,doImport};
+})();
+})();
+</script>
+<script>
+/* Look toggle: New Vintage | Commerce7. Sets data-look on <html>, persists in localStorage. */
+(function(){
+var KEY='holiday-planner.look',root=document.documentElement;
+function loadInter(){if(document.getElementById('inter-font'))return;var k=document.createElement('link');k.id='inter-font';k.rel='stylesheet';k.href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap';document.head.appendChild(k);}
+function sync(){var c7=root.getAttribute('data-look')==='commerce7';document.querySelectorAll('[data-look-set]').forEach(function(b){b.setAttribute('aria-pressed',String((b.dataset.lookSet==='commerce7')===c7));});}
+function setLook(v){if(v==='commerce7'){root.setAttribute('data-look','commerce7');loadInter();}else{root.removeAttribute('data-look');}try{localStorage.setItem(KEY,v==='commerce7'?'commerce7':'newvintage');}catch(e){}sync();}
+document.querySelectorAll('[data-look-set]').forEach(function(b){b.addEventListener('click',function(){setLook(b.dataset.lookSet);});});
+sync();
+})();
+</script>
+</body>
+</html>
