@@ -11,7 +11,13 @@ A one-page October–December planner that shows whether your holiday calendar r
 
 ## Make the numbers live
 
-When you're ready, turn on the New Vintage connector in Claude, upload [UPGRADE_0.4.md](UPGRADE_0.4.md) in the same chat, and say "Connect my planner to New Vintage."
+The free planner works with numbers you enter. To sync your winery data, follow these steps in order:
+
+1. [Start a New Vintage Pro trial or activate Pro](https://www.newvintage.ai/pricing). Install New Vintage through Commerce7, finish account setup, and connect your data sources. The Claude connector requires an active Pro entitlement and synced data.
+2. [Connect New Vintage to Claude](https://www.newvintage.ai/mcp). In Claude, go to **Settings → Connectors**, choose **New Vintage**, sign in, allow access, and enable it for the chat where you built your planner.
+3. Upload [UPGRADE_0.4.md](UPGRADE_0.4.md) in that same chat and say **"Connect my planner to New Vintage."**
+
+The [Resources page](https://www.newvintage.ai/resources) walks through the free and synced paths.
 
 ## What's in this folder
 
