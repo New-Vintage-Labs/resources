@@ -1,8 +1,10 @@
-# Holiday Campaign Planner — live data upgrade v0.5.1
+# Holiday Campaign Planner — live data upgrade
+
+**Version 0.5.1** · Upgrades planners built from holiday_planner_SPEC.md v0.5
 
 *For the winery: when you're ready to make your planner's numbers live, turn on the New Vintage connector in Claude, then upload this file in the chat where you built your planner and say "Connect my planner to New Vintage."*
 
-You are upgrading a Holiday Campaign Planner that was built from the build spec (SPEC_0.5). You'll turn it into a live planner whose numbers come from the winery's Commerce7, email and SMS data through the New Vintage connector. The page, its layout and the team's activities stay as they are. Work through the **Steps** in order. Each step ends on a **Done when** line; finish it before starting the next.
+You are upgrading a Holiday Campaign Planner that was built from the build spec (holiday_planner_SPEC.md). You'll turn it into a live planner whose numbers come from the winery's Commerce7, email and SMS data through the New Vintage connector. The page, its layout and the team's activities stay as they are. Work through the **Steps** in order. Each step ends on a **Done when** line; finish it before starting the next.
 
 All data access is read-only:
 - Run SELECT queries through `safe_tenant_sql`.

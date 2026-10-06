@@ -1,18 +1,20 @@
-# Holiday Campaign Planner — VIP gifters module v0.1.1
+# Holiday Campaign Planner — VIP gifters module
 
-*For the winery: use the same chat and artifact as your existing New Vintage planner, with the New Vintage connector on. If you started with the manual SPEC_0.5.md, first run UPGRADE_0.5.md on that same artifact. A planner built directly from SPEC_0.5_NVPRO.md is also supported. Then upload this file and say "Add VIP gifters to my planner." Do not rebuild an existing planner.*
+**Version 0.1.1** · Requires a connected planner: holiday_planner_SPEC.md v0.5 upgraded with holiday_planner_UPGRADE.md v0.5.1, or holiday_planner_SPEC_NVPRO.md v0.5
+
+*For the winery: use the same chat and artifact as your existing New Vintage planner, with the New Vintage connector on. If you started with the manual holiday_planner_SPEC.md, first run holiday_planner_UPGRADE.md on that same artifact. A planner built directly from holiday_planner_SPEC_NVPRO.md is also supported. Then upload this file and say "Add VIP gifters to my planner." Do not rebuild an existing planner.*
 
 You are adding a **VIP gifters** tab to a winery's live Holiday Campaign Planner. It answers one question: **which of our biggest gift-givers have ordered this season, and whose revenue is at risk?** A handful of corporate and individual gifters often carry a large share of holiday revenue, and one or two of them skipping a season can break the plan. The tab finds those gifters in Commerce7 through the New Vintage connector, compares each one's ordering this season with their own history, and ties the corporate ones to the planner's corporate gifting actual. The plan, its programs and every number the team typed stay as they are.
 
-Work through the **Steps** in order. Each step ends on a **Done when** line; finish it before starting the next. The sections after the Steps define the page, the rules and the data. The page follows them exactly, and every label, total and explanation on it uses the words in **Terms**. Where this file names a SPEC_0.5_NVPRO.md section, that section applies unchanged.
+Work through the **Steps** in order. Each step ends on a **Done when** line; finish it before starting the next. The sections after the Steps define the page, the rules and the data. The page follows them exactly, and every label, total and explanation on it uses the words in **Terms**. Where this file names a holiday_planner_SPEC_NVPRO.md section, that section applies unchanged.
 
 All data access is read-only:
 - Run SELECT queries through `safe_tenant_sql`, from chat and from the page, with the planner's `live.tenantId`.
 - Leave every write tool uncalled. When the winery needs something created in Commerce7 (a tag, a code), tell the user how to do it there.
-- **Call the connector one query at a time**, as SPEC_0.5_NVPRO.md → **Calling the connector** says.
+- **Call the connector one query at a time**, as holiday_planner_SPEC_NVPRO.md → **Calling the connector** says.
 - **Personal data:** this module is the one place the planner shows customers by name. Show and save a gifter's Commerce7 customer id and name only. Gift recipients are counted, never named. Emails, phones and addresses stay out of the chat, the page and the saved plan.
 
-**When the user moves on without confirming,** follow SPEC_0.5_NVPRO.md's rule: use what you proposed, mark it **"Assumed — not confirmed,"** and list it in the V6 handover.
+**When the user moves on without confirming,** follow holiday_planner_SPEC_NVPRO.md's rule: use what you proposed, mark it **"Assumed — not confirmed,"** and list it in the V6 handover.
 
 ---
 
@@ -20,18 +22,18 @@ All data access is read-only:
 
 ### V1. Check the planner and the connection
 
-1. Find the existing planner in this chat. It must be a New Vintage edition live artifact (`edition: 'new-vintage'`, `schemaVersion` 5 or later) with a `live.tenantId`. If it is still the manual planner, stop and ask the user to run UPGRADE_0.5.md on the same artifact first. If no planner exists, offer SPEC_0.5.md followed by UPGRADE_0.5.md, or a direct build from SPEC_0.5_NVPRO.md, then stop. Never rebuild or reset an existing planner to satisfy this check.
+1. Find the existing planner in this chat. It must be a New Vintage edition live artifact (`edition: 'new-vintage'`, `schemaVersion` 5 or later) with a `live.tenantId`. If it is still the manual planner, stop and ask the user to run holiday_planner_UPGRADE.md on the same artifact first. If no planner exists, offer holiday_planner_SPEC.md followed by holiday_planner_UPGRADE.md, or a direct build from holiday_planner_SPEC_NVPRO.md, then stop. Never rebuild or reset an existing planner to satisfy this check.
 2. Run `discover_tenant_data_sources` with that `tenantId`, and record Commerce7's last sync.
 3. Read `programSetup.corp` and `live.programRules`:
    - **`'rules'`:** corporate gifters come from those rules.
-   - **`'pending'` or `'manual'`:** the planner can't recognize corporate gifting orders yet. Offer to run SPEC_0.5_NVPRO.md → **When the user pastes a Setup prompt** for corporate gifting now. If the user declines, continue with individual gifters only and set `settings.types` to `['individual']`.
+   - **`'pending'` or `'manual'`:** the planner can't recognize corporate gifting orders yet. Offer to run holiday_planner_SPEC_NVPRO.md → **When the user pastes a Setup prompt** for corporate gifting now. If the user declines, continue with individual gifters only and set `settings.types` to `['individual']`.
 4. Show the user a three-line summary: the winery, Commerce7's last sync, and how corporate gifting orders are recognized ("orders with sales attribute code 'corp'," or "not set up yet").
 
 **Done when:** you know the one tenant, the planner exists, and corporate gifting is either set up or the user chose individuals only.
 
 ### V2. Ask the setup questions
 
-Run SPEC_0.5_NVPRO.md's **Q4** for the winery's customer tags, then ask every question below in **one message**, numbered, each with its default, so the user can reply "defaults are fine." Save the answers in `modules.vip.settings`.
+Run holiday_planner_SPEC_NVPRO.md's **Q4** for the winery's customer tags, then ask every question below in **one message**, numbered, each with its default, so the user can reply "defaults are fine." Save the answers in `modules.vip.settings`.
 
 | # | Question | Default |
 | --- | --- | --- |
@@ -57,9 +59,9 @@ Run SPEC_0.5_NVPRO.md's **Q4** for the winery's customer tags, then ask every qu
 
 ### V4. Build the tab
 
-Start from the latest whole plan. Apply UPGRADE_0.5.md → **U2. Start from the latest plan**'s whole-plan/CSV merge checks for both upgraded and direct-build planners; the CSV alone is not the plan. Then follow SPEC_0.5_NVPRO.md → **When the user asks for changes in chat**. Build the tab to **Page**, **Rules** and **Look**, make every change in **Planner changes**, and save the V3 results in `modules.vip` (see **Saving**). Update the same artifact in place and raise `planRevision` by 1.
+Start from the latest whole plan. Apply holiday_planner_UPGRADE.md → **U2. Start from the latest plan**'s whole-plan/CSV merge checks for both upgraded and direct-build planners; the CSV alone is not the plan. Then follow holiday_planner_SPEC_NVPRO.md → **When the user asks for changes in chat**. Build the tab to **Page**, **Rules** and **Look**, make every change in **Planner changes**, and save the V3 results in `modules.vip` (see **Saving**). Update the same artifact in place and raise `planRevision` by 1.
 
-**Done when:** the VIP gifters tab has every part and state in **Page**, every item in **Planner changes** is in place, the tab opens with the winery's gifters and the planner's synced stamp, and SPEC_0.5_NVPRO.md's step 7 checks still match.
+**Done when:** the VIP gifters tab has every part and state in **Page**, every item in **Planner changes** is in place, the tab opens with the winery's gifters and the planner's synced stamp, and holiday_planner_SPEC_NVPRO.md's step 7 checks still match.
 
 ### V5. Check the numbers
 
@@ -108,13 +110,13 @@ These run only when the user asks, after the tab is built.
 - **"Refresh VIP gifters"** (chat sync, or a page that can't reach the connector): run **Q-Gifters** in **season** mode, merge the complete result into the latest saved roster using **Saving → Loading** below, replace the season-0 figures and `modules.vip.syncedAt`, keep `planRevision` as it is, and say how at-risk revenue moved, in one sentence. This refresh changes the VIP module only; it does not claim that the main program actuals or other sections refreshed. Use the full planner Refresh to update both the program actuals and VIP figures.
 - **"Re-read gift history"** (new minimum, seasons, tag or types): re-run V2's changed questions and V3, replace `modules.vip.gifters` figures (keeping each gifter's `followUp`, `hidden` and `outreach`), and raise `planRevision` by 1.
 - **"Draft outreach for at-risk gifters":** propose one Direct outreach activity per owner (or one for all when no owners are typed) covering the at-risk gifters, with talking points from each gifter's history. Add them on the user's yes, and raise `planRevision` by 1.
-- **Any other edit to the tab:** follow SPEC_0.5_NVPRO.md → **When the user asks for changes in chat**, keeping `modules.vip` figures and follow-up as they are.
+- **Any other edit to the tab:** follow holiday_planner_SPEC_NVPRO.md → **When the user asks for changes in chat**, keeping `modules.vip` figures and follow-up as they are.
 
 ---
 
 ## Terms
 
-- **Season**, **plan's season**, **last season**, **today** and **replay**: as SPEC_0.5_NVPRO.md → **Terms** defines them.
+- **Season**, **plan's season**, **last season**, **today** and **replay**: as holiday_planner_SPEC_NVPRO.md → **Terms** defines them.
 - **Seasons read**: the plan's season (season 0) and up to three seasons before it (1 = last season).
 - **Gift order**: a paid, non-refund, non-Club order with `sub_total > 0` and a customer that is either a **corporate gift order** (it matches the planner's corporate gifting rules) or an **individual gift order** (it has a gift message or ships to an address other than the billing address).
 - **Gift revenue**: Σ `sub_total` of a gifter's gift orders of their type in a season.
@@ -202,7 +204,7 @@ Under the roster in `text-tertiary`: "From Commerce7 through New Vintage · gift
 | Before the season | The before-the-season headline; every returning gifter is Expected later |
 | No gifters | "No gifters reached ${minimum} in the seasons read. Say 'Re-read gift history' in the chat to lower it." |
 | Filters hide everything | "No gifters match these filters · Show all" |
-| Replay | Today is the as-of date everywhere (SPEC_0.5_NVPRO.md → **Replay**) |
+| Replay | Today is the as-of date everywhere (holiday_planner_SPEC_NVPRO.md → **Replay**) |
 | Sync states | The planner's **Sync states**, with VIP gifters as its own section |
 
 ---
@@ -222,7 +224,7 @@ Under the roster in `text-tertiary`: "From Commerce7 through New Vintage · gift
 
 ## Rules
 
-- **Seasons read** use SPEC_0.5_NVPRO.md's season (13 weeks from the first Monday on or after Oct 1). Season 0 runs to `:order_end`; earlier seasons are complete.
+- **Seasons read** use holiday_planner_SPEC_NVPRO.md's season (13 weeks from the first Monday on or after Oct 1). Season 0 runs to `:order_end`; earlier seasons are complete.
 - **Day of season** = (local paid date − season start) in whole days. **Usual date** = the plan's season start + the largest first-gift-order day of season across seasons 1–3 the gifter ordered in. A New gifter has none.
 - **Status,** checked in order:
   1. **Ordered:** gift revenue in season 0 > 0, and gift orders in at least one earlier season.
@@ -235,7 +237,7 @@ Under the roster in `text-tertiary`: "From Commerce7 through New Vintage · gift
 - **Totals and groups** leave out hidden gifters.
 - **Minimum** applies to a gifter's best season in seasons 0–3. Tagged gifters always qualify.
 - **Add to an outreach activity:** find the Direct outreach activity this module created (`modules.vip.outreachActivityId`) whose weeks include today. With none, create one: title "At-risk VIP gifters," lane Direct outreach, start week = today's season week, 1 week, program corporate gifting (or other when only individuals are tracked). Add the gifter's id to `vipGifterIds`, set the audience to the label "At-risk VIP gifters ({n})" and the list size override to n. The plan's totals follow from the activity as usual.
-- **Formatting:** SPEC_0.5_NVPRO.md → **Rules**, Formatting. Dates in the table read "Nov 3" for the plan's season and "Nov 4, 2025" for other years.
+- **Formatting:** holiday_planner_SPEC_NVPRO.md → **Rules**, Formatting. Dates in the table read "Nov 3" for the plan's season and "Nov 4, 2025" for other years.
 
 ---
 
@@ -248,8 +250,8 @@ Under the roster in `text-tertiary`: "From Commerce7 through New Vintage · gift
 
   `id` is the Commerce7 customer id; `name` is "{first name} {last name}." Dates are ISO; `firstDay` is a day of season; money is whole dollars.
 - **Each sync** replaces `bySeason[0]` for every gifter, adds gifters who newly qualify, and sets `syncedAt`. **Re-read** replaces every `bySeason` and `seasons`. `followUp`, `hidden` and `outreach` change only when the team changes them.
-- **Loading:** extend SPEC_0.5_NVPRO.md → **Saving** without replacing its plan-revision rule. When `planRevision` is unchanged and the built-in `modules.vip.syncedAt` is newer than the saved module timestamp, merge the VIP result independently of `live.syncedAt`, including when the main planner timestamp is unchanged. Match gifters by customer id; replace only `bySeason[0]` with the new current-season figures (zero figures for an existing gifter absent from a complete season result), add newly qualifying gifters, and update the module timestamp. Preserve every existing gifter's past-season history, `followUp`, `hidden` and `outreach`, as well as module settings, outreach activity links, all plan edits and every override. Save the merged whole plan. Never advance `live.syncedAt` to imply sections that were not refreshed; ordinary planner-sync timestamp merging still follows the base spec.
-- **When saving isn't available:** SPEC_0.5_NVPRO.md → **Saving**.
+- **Loading:** extend holiday_planner_SPEC_NVPRO.md → **Saving** without replacing its plan-revision rule. When `planRevision` is unchanged and the built-in `modules.vip.syncedAt` is newer than the saved module timestamp, merge the VIP result independently of `live.syncedAt`, including when the main planner timestamp is unchanged. Match gifters by customer id; replace only `bySeason[0]` with the new current-season figures (zero figures for an existing gifter absent from a complete season result), add newly qualifying gifters, and update the module timestamp. Preserve every existing gifter's past-season history, `followUp`, `hidden` and `outreach`, as well as module settings, outreach activity links, all plan edits and every override. Save the merged whole plan. Never advance `live.syncedAt` to imply sections that were not refreshed; ordinary planner-sync timestamp merging still follows the base spec.
+- **When saving isn't available:** holiday_planner_SPEC_NVPRO.md → **Saving**.
 
 ---
 
@@ -261,12 +263,12 @@ Under the roster in `text-tertiary`: "From Commerce7 through New Vintage · gift
 | --- | --- |
 | Names | `customers.first_name`, `last_name`. There is no company field on customers, and `orders.bill_to->>'company'` was empty on every holiday 2025 gift order at a large tenant, so a corporate gifter shows as the person who buys. |
 | Customer link | `orders.customer_id` → `customers.id`. About 0.5% of orders have no customer; they can't be gifters. |
-| Corporate rules | Build `:corp_predicate` from `live.programRules` exactly as SPEC_0.5_NVPRO.md's Program template builds its corporate gifting branch, so the tab and the program count the same orders. |
+| Corporate rules | Build `:corp_predicate` from `live.programRules` exactly as holiday_planner_SPEC_NVPRO.md's Program template builds its corporate gifting branch, so the tab and the program count the same orders. |
 | Corporate Orders tool | Many tenants never use `purchase_type = 'Corporate Order'` (a large tenant had none in holiday 2025). The confirmed rules decide. |
 | Gift signal | Imported history often lacks gift messages; the address test still works. |
 | Recipients | Count distinct `lower(btrim(ship_to->>'address')) || '|' || lower(btrim(ship_to->>'city'))` over orders with a ship-to address. Pickup and carry-out orders add none. |
 | Commerce7 link | UNVERIFIED: the admin URL pattern for a customer profile. Confirm it before building; until then, omit the link. |
-| Limits | SPEC_0.5_NVPRO.md → **Data facts**, Connector limits. Give Q-Gifters `statementTimeoutMs` 60000. |
+| Limits | holiday_planner_SPEC_NVPRO.md → **Data facts**, Connector limits. Give Q-Gifters `statementTimeoutMs` 60000. |
 
 ### Queries
 
@@ -340,7 +342,7 @@ Output: one row per gifter and season with gift orders. The page computes day of
 
 ## Look
 
-The tab uses SPEC_0.5_NVPRO.md → **Look** unchanged, in both looks. It adds:
+The tab uses holiday_planner_SPEC_NVPRO.md → **Look** unchanged, in both looks. It adds:
 
 - **Status colors:** At risk uses `status-warning`; Ordered and New use `status-success`; Expected later uses `text-secondary`; Lapsed uses `text-tertiary`. Each always comes with its icon (alert circle, check circle, clock, minus circle) and its word. Group rows use the matching `-bg` token, and `surface-subtle` for Expected later and Lapsed.
 - **Type chips:** Corporate takes the planner's chip style in the corporate gifting color. Individual takes the neutral badge (`surface-panel` ground, a 3px `text-tertiary` left border).
