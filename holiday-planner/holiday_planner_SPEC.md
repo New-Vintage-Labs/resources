@@ -4,7 +4,7 @@
 - **Next step:** [holiday_planner_UPGRADE.md](holiday_planner_UPGRADE.md) (v0.5.1), to connect the planner to New Vintage
 - **Add-on:** [vip_gifters_ADD-ON.md](vip_gifters_ADD-ON.md) (v0.1.1), after the upgrade
 
-*For the winery: upload this file to a new chat in Claude or ChatGPT and say "Build my holiday planner." Have your holiday calendar handy (a spreadsheet, doc or typed list). When you're ready to make the numbers live, the companion file holiday_planner_UPGRADE.md does that.*
+*For the winery: upload this file to a new chat in Claude or ChatGPT and say "Build my holiday planner." Have your holiday calendar handy (a spreadsheet, doc or typed list). When you're ready to make the numbers live, the companion file [holiday_planner_UPGRADE.md](holiday_planner_UPGRADE.md) does that.*
 
 You are building a one-page holiday campaign planner for a winery's DTC team, covering **October–December only**. It answers one question: **does our October–December plan reach our revenue goal, and how is it tracking?** The team types the plan and its actuals; the page calculates everything else and labels which is which. It is a starting point the team makes their own, on the page itself or by asking you in chat.
 
@@ -179,9 +179,9 @@ Treat any later request ("add a Black Friday SMS," "change the club list size to
 
 ### When the user asks to connect live data
 
-When the user asks to make the numbers live ("connect my planner to New Vintage") or to pull real numbers from Commerce7, Klaviyo, Mailchimp or RedChirp, follow **holiday_planner_UPGRADE.md**. If it isn't in this chat, ask them to upload it from the same place they got this file. Until then, keep every number typed.
+When the user asks to make the numbers live ("connect my planner to New Vintage") or to pull real numbers from Commerce7, Klaviyo, Mailchimp or RedChirp, follow **[holiday_planner_UPGRADE.md](holiday_planner_UPGRADE.md)**. If it isn't in this chat, ask them to upload it from the same place they got this file. Until then, keep every number typed.
 
-**Done when:** you have shown holiday_planner_UPGRADE.md's step U1 summary, or the user has been asked to upload the file.
+**Done when:** you have shown [holiday_planner_UPGRADE.md](holiday_planner_UPGRADE.md)'s step U1 summary, or the user has been asked to upload the file.
 
 ---
 
