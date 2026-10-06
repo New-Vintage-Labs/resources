@@ -1,6 +1,8 @@
 # Holiday Campaign Planner — build spec
 
-**Version 0.5** · Works with holiday_planner_UPGRADE.md v0.5.1 and vip_gifters_ADD-ON.md v0.1.1
+- **Version:** 0.5
+- **Next step:** [holiday_planner_UPGRADE.md](holiday_planner_UPGRADE.md) (v0.5.1), to connect the planner to New Vintage
+- **Add-on:** [vip_gifters_ADD-ON.md](vip_gifters_ADD-ON.md) (v0.1.1), after the upgrade
 
 *For the winery: upload this file to a new chat in Claude or ChatGPT and say "Build my holiday planner." Have your holiday calendar handy (a spreadsheet, doc or typed list). When you're ready to make the numbers live, the companion file holiday_planner_UPGRADE.md does that.*
 

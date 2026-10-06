@@ -1,6 +1,8 @@
 # Holiday Campaign Planner — live data upgrade
 
-**Version 0.5.1** · Upgrades planners built from holiday_planner_SPEC.md v0.5
+- **Version:** 0.5.1
+- **Upgrades:** planners built from [holiday_planner_SPEC.md](holiday_planner_SPEC.md) (v0.5)
+- **Add-on:** [vip_gifters_ADD-ON.md](vip_gifters_ADD-ON.md) (v0.1.1), after this upgrade
 
 *For the winery: when you're ready to make your planner's numbers live, turn on the New Vintage connector in Claude, then upload this file in the chat where you built your planner and say "Connect my planner to New Vintage."*
 

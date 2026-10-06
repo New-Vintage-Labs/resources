@@ -1,6 +1,8 @@
 # Holiday Campaign Planner, New Vintage edition — build spec
 
-**Version 0.5** · Works with vip_gifters_ADD-ON.md v0.1.1
+- **Version:** 0.5
+- **Replaces:** [holiday_planner_SPEC.md](holiday_planner_SPEC.md) (v0.5) followed by [holiday_planner_UPGRADE.md](holiday_planner_UPGRADE.md) (v0.5.1)
+- **Add-on:** [vip_gifters_ADD-ON.md](vip_gifters_ADD-ON.md) (v0.1.1)
 
 *For the winery: in Claude, turn on the New Vintage connector (a New Vintage Pro account), then upload this file to a new chat and say "Build my holiday planner." Have your holiday calendar handy, or let Claude draft one from last season's campaigns.*
 

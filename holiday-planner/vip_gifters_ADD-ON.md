@@ -1,6 +1,7 @@
 # Holiday Campaign Planner — VIP gifters module
 
-**Version 0.1.1** · Requires a connected planner: holiday_planner_SPEC.md v0.5 upgraded with holiday_planner_UPGRADE.md v0.5.1, or holiday_planner_SPEC_NVPRO.md v0.5
+- **Version:** 0.1.1
+- **Requires:** a connected planner, built from [holiday_planner_SPEC.md](holiday_planner_SPEC.md) (v0.5) and upgraded with [holiday_planner_UPGRADE.md](holiday_planner_UPGRADE.md) (v0.5.1), or built directly from [holiday_planner_SPEC_NVPRO.md](holiday_planner_SPEC_NVPRO.md) (v0.5)
 
 *For the winery: use the same chat and artifact as your existing New Vintage planner, with the New Vintage connector on. If you started with the manual holiday_planner_SPEC.md, first run holiday_planner_UPGRADE.md on that same artifact. A planner built directly from holiday_planner_SPEC_NVPRO.md is also supported. Then upload this file and say "Add VIP gifters to my planner." Do not rebuild an existing planner.*
 
